@@ -1,0 +1,19 @@
+# Raw competition data and archives
+data/raw/
+*.zip
+
+# Local environments and secrets
+.venv/
+.env
+__pycache__/
+*.py[cod]
+
+# Notebook artifacts
+.ipynb_checkpoints/
+
+# OS/editor files
+.DS_Store
+.vscode/
+
+# Temporary logs
+*.log

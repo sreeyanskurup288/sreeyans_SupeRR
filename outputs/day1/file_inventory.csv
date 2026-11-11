@@ -1,0 +1,7 @@
+file,rows,columns,size_bytes,columns_list
+ball_by_ball.csv,200999,33,41071609,match_id | innings | overid | over_ball_num | innings_ball_num | batting_team_id | bowling_team_id | striker_id | striker_name | non_striker_id | non_striker_name | bowler_id | bowler_name | batting_type | bowling_type | batting_order | runs | is_four | is_six | is_wicket | dismissal_type_id | dismissal_type | dismissed_player_id | extras_type | extras1_runs | extras_2_runs | pace_or_spin | bowl_speed | stroke | delivery_style | over_or_around | on_or_off | delivery_ist_time
+competition_team_player_mapping.csv,6413,6,462969,comp_id | comp_name | team_id | team_name | player_id | player_name
+competitions.csv,141,4,7624,comp_id | comp_name | match_format | season
+matches.csv,883,22,123864,match_id | comp_id | match_number | match_date | stage | venue_id | venue_country | home_team_id | home_team | away_team_id | away_team | home_team_captain_id | away_team_captain_id | toss_win_team_id | toss_opted | man_of_the_match | first_inn_revised_overs | second_inn_revised_overs | revised_target | knock_out | win_team_id | result
+playing_eleven.csv,28381,9,966287,match_id | team_id | player_id | batting_order | is_played | is_captain | is_wk | is_impact | is_impact_off
+teams.csv,353,3,6922,comp_id | team_id | team_name
