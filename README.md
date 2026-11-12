@@ -31,7 +31,7 @@ python scripts/day2_delivery_validation.py \
   --output-dir outputs/day2
 ```
 
-It produces a delivery-semantics summary, sample-match validation table, and notes. The current export uses `extras1_runs` as a category code rather than a numeric extras amount, so exact team-score reconstruction remains a documented data dependency for the next stage.
+It produces a delivery-semantics summary, sample-match validation table, and notes. The current export uses `extras1_runs` as a category code rather than a numeric extras amount. For the prototype, each nonblank extra event is provisionally counted as one team run and `extras_2_runs` is ignored; this assumption is documented and can be revised if later checks reveal discrepancies.
 
 ## Current data scope
 

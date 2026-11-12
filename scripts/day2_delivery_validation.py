@@ -10,6 +10,7 @@ import pandas as pd
 
 LEGAL_EXTRAS = {"wide", "Overstep"}
 SAMPLE_MATCH_ID = 13511
+PROVISIONAL_EXTRA_RUNS = 1
 
 
 def semantic_summary(ball: pd.DataFrame) -> pd.DataFrame:
@@ -63,11 +64,11 @@ def validate_match(ball: pd.DataFrame, match_id: int) -> pd.DataFrame:
                 "illegal_deliveries": int((~legal).sum()),
                 "runs_off_bat": int(group["runs_off_bat"].sum()),
                 "extra_events": int(group["extra_event"].sum()),
-                "extras2_sum": int(group["extras_2_runs"].sum()),
+                "extras2_ignored_sum": int(group["extras_2_runs"].sum()),
                 "wickets": int(group["is_wicket"].sum()),
-                "score_lower_bound_runs_only": int(group["runs_off_bat"].sum()),
-                "score_if_each_extra_event_is_one_run": int(
-                    group["runs_off_bat"].sum() + group["extra_event"].sum() + group["extras_2_runs"].sum()
+                "provisional_extra_runs": int(group["extra_event"].sum() * PROVISIONAL_EXTRA_RUNS),
+                "provisional_total_runs": int(
+                    group["runs_off_bat"].sum() + group["extra_event"].sum() * PROVISIONAL_EXTRA_RUNS
                 ),
             }
         )
@@ -83,13 +84,13 @@ def write_notes(output_dir: Path, semantics: pd.DataFrame, validation: pd.DataFr
         "- `runs` is consistent with batter runs: it aligns with `is_four` and `is_six` and ranges from 0 to 6.",
         "- `extras_type` identifies wide, leg-bye, bye, overstep, other, and penalty events.",
         "- `extras1_runs` is not a usable extra-run amount: it acts like a category code (ordinary deliveries use 6; wide 2; leg-bye 3; bye 4; overstep 1; other 5; penalty 7).",
-        "- `extras_2_runs` is usually zero and is not sufficient by itself to recover all extras.",
+        "- `extras_2_runs` is ignored provisionally, pending a later discrepancy review.",
         "- `innings_ball_num` is unique within match and innings, but it counts delivery rows rather than legal balls.",
         "- The default legal-delivery rule for the next stage is to treat `wide` and `Overstep` as illegal, subject to further validation.",
         "",
         "## Exact-score limitation",
         "",
-        "The supplied export does not expose a reliable numeric amount for every extra event. The validation output therefore reports batter-runs-only and a clearly labelled one-run-per-extra-event scenario. Exact team-score reconstruction should not be treated as final until the organisers clarify the extras encoding or another authoritative score field is located.",
+        "For the current prototype, every nonblank `extras_type` event is provisionally awarded one team run. This intentionally does not capture five wides or multi-run byes/leg-byes. `extras1_runs` is treated as a type ID and `extras_2_runs` is ignored. If later checks reveal a discrepancy, this rule will be revisited.",
         "",
         "## Sample match",
         "",

@@ -5,13 +5,13 @@
 - `runs` is consistent with batter runs: it aligns with `is_four` and `is_six` and ranges from 0 to 6.
 - `extras_type` identifies wide, leg-bye, bye, overstep, other, and penalty events.
 - `extras1_runs` is not a usable extra-run amount: it acts like a category code (ordinary deliveries use 6; wide 2; leg-bye 3; bye 4; overstep 1; other 5; penalty 7).
-- `extras_2_runs` is usually zero and is not sufficient by itself to recover all extras.
+- `extras_2_runs` is ignored provisionally, pending a later discrepancy review.
 - `innings_ball_num` is unique within match and innings, but it counts delivery rows rather than legal balls.
 - The default legal-delivery rule for the next stage is to treat `wide` and `Overstep` as illegal, subject to further validation.
 
 ## Exact-score limitation
 
-The supplied export does not expose a reliable numeric amount for every extra event. The validation output therefore reports batter-runs-only and a clearly labelled one-run-per-extra-event scenario. Exact team-score reconstruction should not be treated as final until the organisers clarify the extras encoding or another authoritative score field is located.
+For the current prototype, every nonblank `extras_type` event is provisionally awarded one team run. This intentionally does not capture five wides or multi-run byes/leg-byes. `extras1_runs` is treated as a type ID and `extras_2_runs` is ignored. If later checks reveal a discrepancy, this rule will be revisited.
 
 ## Sample match
 
@@ -37,8 +37,8 @@ python scripts/day2_delivery_validation.py --input-dir /path/to/data --output-di
 
 ## Sample match validation
 
-|   match_id |   innings |   delivery_rows |   first_innings_ball_num |   last_innings_ball_num |   max_overid |   legal_deliveries |   illegal_deliveries |   runs_off_bat |   extra_events |   extras2_sum |   wickets |   score_lower_bound_runs_only |   score_if_each_extra_event_is_one_run |
-|-----------:|----------:|----------------:|-------------------------:|------------------------:|-------------:|-------------------:|---------------------:|---------------:|---------------:|--------------:|----------:|------------------------------:|---------------------------------------:|
-|      13511 |         1 |             121 |                        1 |                     121 |           20 |                118 |                    3 |            100 |              3 |             0 |        10 |                           100 |                                    103 |
-|      13511 |         2 |             103 |                        1 |                     103 |           18 |                103 |                    0 |             99 |              2 |             0 |         1 |                            99 |                                    101 |
+|   match_id |   innings |   delivery_rows |   first_innings_ball_num |   last_innings_ball_num |   max_overid |   legal_deliveries |   illegal_deliveries |   runs_off_bat |   extra_events |   extras2_ignored_sum |   wickets |   provisional_extra_runs |   provisional_total_runs |
+|-----------:|----------:|----------------:|-------------------------:|------------------------:|-------------:|-------------------:|---------------------:|---------------:|---------------:|----------------------:|----------:|-------------------------:|-------------------------:|
+|      13511 |         1 |             121 |                        1 |                     121 |           20 |                118 |                    3 |            100 |              3 |                     0 |        10 |                        3 |                      103 |
+|      13511 |         2 |             103 |                        1 |                     103 |           18 |                103 |                    0 |             99 |              2 |                     0 |         1 |                        2 |                      101 |
 
