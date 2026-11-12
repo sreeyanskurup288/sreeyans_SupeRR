@@ -21,6 +21,18 @@ Outputs:
 - `data_dictionary.md`: observed columns, types, and missing-value counts.
 - `day1_summary.md`: concise findings for the project log.
 
+## Day 2 automation
+
+The Day 2 workflow inspects delivery-field semantics and validates a complete sample match without uploading raw data:
+
+```bash
+python scripts/day2_delivery_validation.py \
+  --input-dir data/raw \
+  --output-dir outputs/day2
+```
+
+It produces a delivery-semantics summary, sample-match validation table, and notes. The current export uses `extras1_runs` as a category code rather than a numeric extras amount, so exact team-score reconstruction remains a documented data dependency for the next stage.
+
 ## Current data scope
 
 The supplied pack contains IPL/T20 data and T20I data from 2022 onward. The main analysis should distinguish:
