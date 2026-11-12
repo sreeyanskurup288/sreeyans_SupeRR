@@ -31,7 +31,7 @@ python scripts/day2_delivery_validation.py \
   --output-dir outputs/day2
 ```
 
-It produces a delivery-semantics summary, sample-match validation table, and notes. The current export uses `extras1_runs` as a category code rather than a numeric extras amount. For the prototype, each nonblank extra event is provisionally given its base one-run award, but the total may be higher (for example, five wides or multi-run byes/leg-byes); `extras_2_runs` is ignored until its meaning is confirmed. This fallback is documented and can be revised if later checks reveal discrepancies.
+It produces a delivery-semantics summary, sample-match validation table, and notes. The current export uses `extras1_runs` as a category code rather than a numeric extras amount. For the prototype, every nonblank extra event contributes exactly one team run throughout the pipeline; `extras_2_runs` is ignored throughout. This is a uniform approximation that intentionally does not model five wides or multi-run byes/leg-byes, and can be revised consistently if later checks reveal discrepancies.
 
 ## Current data scope
 
