@@ -33,6 +33,18 @@ python scripts/day2_delivery_validation.py \
 
 It produces a delivery-semantics summary, sample-match validation table, and notes. The current export uses `extras1_runs` as a category code rather than a numeric extras amount. For the prototype, every nonblank extra event contributes exactly one team run throughout the pipeline; `extras_2_runs` is ignored throughout. This is a uniform approximation that intentionally does not model five wides or multi-run byes/leg-byes, and can be revised consistently if later checks reveal discrepancies.
 
+## Day 3 automation
+
+The Day 3 workflow builds delivery-level match state for all available deliveries:
+
+```bash
+python scripts/day3_match_state.py \
+  --input-dir data/raw \
+  --output-dir outputs/day3
+```
+
+It creates `score_before`, `wickets_before`, legal-ball state, target, runs required, required run rate, current run rate, projected final score, innings phase, and competition/stage context. The repository commits a sample delivery-state table and compact all-match summary; the script can also write the full derived state locally with `--write-full`.
+
 ## Current data scope
 
 The supplied pack contains IPL/T20 data and T20I data from 2022 onward. The main analysis should distinguish:
