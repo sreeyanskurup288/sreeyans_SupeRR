@@ -45,6 +45,18 @@ python scripts/day3_match_state.py \
 
 It creates `score_before`, `wickets_before`, legal-ball state, target, runs required, required run rate, current run rate, projected final score, innings phase, and competition/stage context. The repository commits a sample delivery-state table and compact all-match summary; the script can also write the full derived state locally with `--write-full`.
 
+## Day 4 automation
+
+The Day 4 workflow converts pre-delivery match state into pressure features and labels:
+
+```bash
+python scripts/day4_pressure_labels.py \
+  --input-dir data/raw \
+  --output-dir outputs/day4
+```
+
+It creates ordinary, practical-pressure, and desperation-pressure labels, first- and second-innings pressure scores, manual examples, and threshold sensitivity results. The score uses normalized required-rate, ball-resource, and wicket-resource components plus modest stage points; no delivery outcome or player performance is used.
+
 ## Current data scope
 
 The supplied pack contains IPL/T20 data and T20I data from 2022 onward. The main analysis should distinguish:

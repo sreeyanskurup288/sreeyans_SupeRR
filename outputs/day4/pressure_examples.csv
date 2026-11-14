@@ -1,0 +1,16 @@
+match_id,innings,overid,innings_ball_num,analysis_group,stage_group,innings_phase,score_before,wickets_before,legal_balls_remaining,runs_required,required_run_rate,pressure_score,pressure_type
+17555,2,19,116,T20I,League,Death,145,7,8,75.0,56.25,74.9889,Ordinary
+47261,1,18,108,T20I,Other,Death,114,8,13,,,74.9901,Ordinary
+14158,2,20,122,IPL,League,Death,138,9,4,19.0,28.5,74.9901,Ordinary
+16062,2,19,115,T20I,League,Death,107,8,11,77.0,42.0,74.9976,Ordinary
+37351,1,20,119,T20I,Other,Death,136,8,5,,,74.9978,Ordinary
+19716,1,19,112,T20I,League,Death,79,8,12,,,75.0,Practical
+46741,1,17,102,T20I,Other,Death,94,8,22,,,75.0002,Practical
+50354,2,18,108,IPL,League,Death,99,9,17,109.0,38.470588235294116,75.0026,Practical
+30071,2,18,110,IPL,League,Death,159,9,17,109.0,38.470588235294116,75.0026,Practical
+40714,2,20,124,IPL,League,Death,205,8,3,17.0,34.0,75.0027,Practical
+40767,2,20,120,IPL,Final,Death,159,7,4,32.0,48.0,90.0728,Desperation
+16665,2,19,122,T20I,Final,Death,127,9,8,41.0,30.75,90.0767,Desperation
+16665,2,19,120,T20I,Final,Death,121,9,9,47.0,31.333333333333336,90.0847,Desperation
+45857,2,16,96,T20I,Final,Middle,64,9,28,77.0,16.5,90.1428,Desperation
+47982,1,19,117,T20I,Final,Death,110,8,8,,,90.167,Desperation
