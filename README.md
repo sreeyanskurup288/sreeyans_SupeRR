@@ -2,6 +2,8 @@
 
 Working repository for SupeRR Selector Season 2 Round 1.
 
+The ball-by-ball source was updated on November 16, 2026. The revised `extras1_runs` field contains numeric extras amounts, so the project now reconstructs delivery totals as `runs + extras1_runs`. See [`docs/data_update_2026-11-16.md`](docs/data_update_2026-11-16.md) for the comparison and migration note.
+
 ## Day 1 automation
 
 The Day 1 workflow inventories the supplied CSV files and creates a joined match-context table by linking `matches.csv` to `competitions.csv` on `comp_id`.
@@ -31,7 +33,7 @@ python scripts/day2_delivery_validation.py \
   --output-dir outputs/day2
 ```
 
-It produces a delivery-semantics summary, sample-match validation table, and notes. The current export uses `extras1_runs` as a category code rather than a numeric extras amount. For the prototype, every nonblank extra event contributes exactly one team run throughout the pipeline; `extras_2_runs` is ignored throughout. This is a uniform approximation that intentionally does not model five wides or multi-run byes/leg-byes, and can be revised consistently if later checks reveal discrepancies.
+It produces a delivery-semantics summary, sample-match validation table, and notes. The revised export provides numeric extra amounts in `extras1_runs`, including 1–5 for wides, byes, and leg-byes. The score rule is now `total_runs = runs + extras1_runs`; `extras_type` remains the category label and `extras_2_runs` is ignored.
 
 ## Day 3 automation
 
@@ -43,7 +45,7 @@ python scripts/day3_match_state.py \
   --output-dir outputs/day3
 ```
 
-It creates `score_before`, `wickets_before`, legal-ball state, target, runs required, required run rate, current run rate, projected final score, innings phase, and competition/stage context. The repository commits a sample delivery-state table and compact all-match summary; the script can also write the full derived state locally with `--write-full`.
+It creates `score_before`, `wickets_before`, legal-ball state, target, runs required, required run rate, current run rate, projected final score, innings phase, and competition/stage context. It uses the corrected numeric extras rule. The repository commits a sample delivery-state table and compact all-match summary; the script can also write the full derived state locally with `--write-full`.
 
 ## Day 4 automation
 

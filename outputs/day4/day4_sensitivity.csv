@@ -1,4 +1,4 @@
 version,practical_threshold,desperation_threshold,second_innings_practical_deliveries,second_innings_desperation_deliveries,desperation_subset_of_practical
-practical_80_desperation_95,80,95,516,3,True
-practical_75_desperation_90,75,90,1863,25,True
-practical_70_desperation_85,70,85,4077,88,True
+practical_80_desperation_95,80,95,520,3,True
+practical_75_desperation_90,75,90,1881,21,True
+practical_70_desperation_85,70,85,4126,84,True

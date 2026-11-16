@@ -2,10 +2,10 @@ innings,analysis_group,stage_group,pressure_type,deliveries
 1,IPL,Final,Desperation,6
 1,IPL,Final,Ordinary,524
 1,IPL,Final,Practical,82
-1,IPL,Knockout,Ordinary,1780
-1,IPL,Knockout,Practical,56
-1,IPL,League,Ordinary,42923
-1,IPL,League,Practical,217
+1,IPL,Knockout,Ordinary,1789
+1,IPL,Knockout,Practical,47
+1,IPL,League,Ordinary,42922
+1,IPL,League,Practical,218
 1,Other T20,Final,Desperation,7
 1,Other T20,Final,Ordinary,191
 1,Other T20,Final,Practical,48
@@ -13,34 +13,33 @@ innings,analysis_group,stage_group,pressure_type,deliveries
 1,Other T20,Knockout,Practical,26
 1,Other T20,League,Ordinary,2889
 1,Other T20,League,Practical,35
-1,T20I,Final,Desperation,4
-1,T20I,Final,Ordinary,537
-1,T20I,Final,Practical,67
-1,T20I,League,Ordinary,29115
-1,T20I,League,Practical,218
-1,T20I,Other,Ordinary,26132
-1,T20I,Other,Practical,393
-2,IPL,Final,Desperation,4
-2,IPL,Final,Ordinary,475
-2,IPL,Final,Practical,27
+1,T20I,Final,Desperation,3
+1,T20I,Final,Ordinary,540
+1,T20I,Final,Practical,65
+1,T20I,League,Ordinary,29110
+1,T20I,League,Practical,223
+1,T20I,Other,Ordinary,26126
+1,T20I,Other,Practical,399
+2,IPL,Final,Desperation,3
+2,IPL,Final,Ordinary,478
+2,IPL,Final,Practical,25
 2,IPL,Knockout,Desperation,7
-2,IPL,Knockout,Ordinary,1529
-2,IPL,Knockout,Practical,177
-2,IPL,League,Ordinary,39350
-2,IPL,League,Practical,516
+2,IPL,Knockout,Ordinary,1530
+2,IPL,Knockout,Practical,176
+2,IPL,League,Ordinary,39341
+2,IPL,League,Practical,525
 2,Other T20,Final,Ordinary,237
-2,Other T20,Knockout,Desperation,1
-2,Other T20,Knockout,Ordinary,443
-2,Other T20,Knockout,Practical,36
-2,Other T20,League,Ordinary,2544
-2,Other T20,League,Practical,39
-2,T20I,Final,Desperation,13
-2,T20I,Final,Ordinary,534
-2,T20I,Final,Practical,35
-2,T20I,League,Ordinary,25599
-2,T20I,League,Practical,420
-2,T20I,Other,Ordinary,22660
-2,T20I,Other,Practical,588
+2,Other T20,Knockout,Ordinary,456
+2,Other T20,Knockout,Practical,24
+2,Other T20,League,Ordinary,2545
+2,Other T20,League,Practical,38
+2,T20I,Final,Desperation,11
+2,T20I,Final,Ordinary,535
+2,T20I,Final,Practical,36
+2,T20I,League,Ordinary,25585
+2,T20I,League,Practical,434
+2,T20I,Other,Ordinary,22646
+2,T20I,Other,Practical,602
 3,IPL,League,Ordinary,9
 3,Other T20,Final,Ordinary,4
 3,Other T20,Knockout,Ordinary,2

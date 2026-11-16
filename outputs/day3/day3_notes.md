@@ -12,7 +12,7 @@
 
 ## Uniform extras rule
 
-Every nonblank `extras_type` event contributes exactly one provisional team run. `extras1_runs` is retained as a type ID and `extras_2_runs` is ignored throughout.
+The revised CSV provides numeric extras in `extras1_runs`. The pipeline now uses `runs + extras1_runs` for total delivery runs; `extras_type` remains the category label and `extras_2_runs` is ignored.
 
 ## Reproduction
 

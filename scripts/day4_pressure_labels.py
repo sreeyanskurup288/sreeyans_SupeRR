@@ -165,7 +165,7 @@ def main() -> None:
         "",
         "## Uniform extras rule",
         "",
-        "Every nonblank extra event contributes exactly one provisional team run. `extras1_runs` is a type ID and `extras_2_runs` is ignored throughout.",
+        "The revised CSV provides numeric extras in `extras1_runs`; total delivery runs are reconstructed as `runs + extras1_runs`. `extras_type` is the category label and `extras_2_runs` is ignored.",
         "",
         "## Counts",
         "",

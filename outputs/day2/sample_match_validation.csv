@@ -1,3 +1,3 @@
-match_id,innings,delivery_rows,first_innings_ball_num,last_innings_ball_num,max_overid,legal_deliveries,illegal_deliveries,runs_off_bat,extra_events,extras2_ignored_sum,wickets,provisional_extra_runs,provisional_total_runs
+match_id,innings,delivery_rows,first_innings_ball_num,last_innings_ball_num,max_overid,legal_deliveries,illegal_deliveries,runs_off_bat,extra_events,extras2_ignored_sum,wickets,extra_runs,total_runs
 13511,1,121,1,121,20,118,3,100,3,0,10,3,103
-13511,2,103,1,103,18,103,0,99,2,0,1,2,101
+13511,2,103,1,103,18,103,0,99,2,0,1,5,104

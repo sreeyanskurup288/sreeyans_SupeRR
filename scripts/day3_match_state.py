@@ -38,8 +38,8 @@ def attach_context(ball: pd.DataFrame, input_dir: Path) -> pd.DataFrame:
 def provisional_runs(ball: pd.DataFrame) -> pd.DataFrame:
     out = ball.copy()
     out["runs_off_bat"] = out["runs"].fillna(0).astype(int)
-    out["extra_event"] = out["extras_type"].notna()
-    out["extra_runs_provisional"] = out["extra_event"].astype(int)
+    out["extra_runs_provisional"] = out["extras1_runs"].fillna(0).astype(int)
+    out["extra_event"] = out["extras_type"].notna() | out["extra_runs_provisional"].gt(0)
     out["total_runs_provisional"] = out["runs_off_bat"] + out["extra_runs_provisional"]
     out["is_legal_delivery"] = ~out["extras_type"].isin(LEGAL_EXTRAS)
     out["wicket_event"] = out["is_wicket"].fillna(False).astype(int)
@@ -172,7 +172,7 @@ def main() -> None:
         "",
         "## Uniform extras rule",
         "",
-        "Every nonblank `extras_type` event contributes exactly one provisional team run. `extras1_runs` is retained as a type ID and `extras_2_runs` is ignored throughout.",
+        "The revised CSV provides numeric extras in `extras1_runs`. The pipeline now uses `runs + extras1_runs` for total delivery runs; `extras_type` remains the category label and `extras_2_runs` is ignored.",
         "",
         "## Reproduction",
         "",

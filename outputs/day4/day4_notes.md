@@ -14,15 +14,15 @@ Pressure is calculated from the match state before the delivery. Delivery outcom
 
 ## Uniform extras rule
 
-Every nonblank extra event contributes exactly one provisional team run. `extras1_runs` is a type ID and `extras_2_runs` is ignored throughout.
+The revised CSV provides numeric extras in `extras1_runs`; total delivery runs are reconstructed as `runs + extras1_runs`. `extras_type` is the category label and `extras_2_runs` is ignored.
 
 ## Counts
 
 - Deliveries processed: 200,999
 - Second-innings deliveries: 95,234
 - First-innings deliveries: 105,727
-- Practical-pressure deliveries (combined): 3,022
-- Desperation-pressure deliveries (combined): 42
+- Practical-pressure deliveries (combined): 3,040
+- Desperation-pressure deliveries (combined): 37
 
 ## Reproduction
 

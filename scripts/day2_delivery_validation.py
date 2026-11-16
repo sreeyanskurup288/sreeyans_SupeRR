@@ -47,7 +47,8 @@ def validate_match(ball: pd.DataFrame, match_id: int) -> pd.DataFrame:
         raise ValueError(f"Sample match {match_id} not found")
     sample["is_legal_delivery_default"] = ~sample["extras_type"].isin(LEGAL_EXTRAS)
     sample["runs_off_bat"] = sample["runs"]
-    sample["extra_event"] = sample["extras_type"].notna()
+    sample["extra_runs"] = sample["extras1_runs"].fillna(0).astype(int)
+    sample["extra_event"] = sample["extras_type"].notna() | sample["extra_runs"].gt(0)
     rows = []
     for innings, group in sample.groupby("innings", sort=True):
         group = group.sort_values("innings_ball_num")
@@ -66,10 +67,8 @@ def validate_match(ball: pd.DataFrame, match_id: int) -> pd.DataFrame:
                 "extra_events": int(group["extra_event"].sum()),
                 "extras2_ignored_sum": int(group["extras_2_runs"].sum()),
                 "wickets": int(group["is_wicket"].sum()),
-                "provisional_extra_runs": int(group["extra_event"].sum() * PROVISIONAL_EXTRA_RUNS),
-                "provisional_total_runs": int(
-                    group["runs_off_bat"].sum() + group["extra_event"].sum() * PROVISIONAL_EXTRA_RUNS
-                ),
+                "extra_runs": int(group["extra_runs"].sum()),
+                "total_runs": int(group["runs_off_bat"].sum() + group["extra_runs"].sum()),
             }
         )
     return pd.DataFrame(rows)
@@ -83,18 +82,18 @@ def write_notes(output_dir: Path, semantics: pd.DataFrame, validation: pd.DataFr
         "",
         "- `runs` is consistent with batter runs: it aligns with `is_four` and `is_six` and ranges from 0 to 6.",
         "- `extras_type` identifies wide, leg-bye, bye, overstep, other, and penalty events.",
-        "- `extras1_runs` is not a usable extra-run amount: it acts like a category code (ordinary deliveries use 6; wide 2; leg-bye 3; bye 4; overstep 1; other 5; penalty 7).",
-        "- `extras_2_runs` is ignored throughout the prototype.",
+        "- The revised `extras1_runs` is a numeric extras amount: wides, byes, and leg-byes vary from 1 to 5; oversteps and other extras are 1; the penalty row is 5.",
+        "- `extras_2_runs` remains zero/unused in the revised export and is ignored.",
         "- `innings_ball_num` is unique within match and innings, but it counts delivery rows rather than legal balls.",
         "- The default legal-delivery rule for the next stage is to treat `wide` and `Overstep` as illegal, subject to further validation.",
         "",
-        "## Exact-score limitation",
+        "## Score reconstruction",
         "",
-        "Uniform provisional rule: every nonblank `extras_type` event contributes exactly one team run. This intentionally approximates five wides and multi-run byes/leg-byes as one run each. `extras1_runs` is treated only as a type ID and `extras_2_runs` is ignored throughout the prototype. If later checks reveal a discrepancy, this rule will be revisited consistently across the pipeline.",
+        "The revised export supports numeric score reconstruction using `total_runs = runs + extras1_runs`. `extras_type` remains the category label, while `extras_2_runs` is ignored. This removes the earlier one-run-per-extra fallback.",
         "",
         "## Sample match",
         "",
-        "The script validates match 13511 structurally: delivery sequence, legal/illegal delivery counts, batter runs, extra events, and wickets by innings. This is a complete two-innings sample for checking the delivery-state pipeline, while the score caveat above remains applicable.",
+        "The script validates match 13511 structurally: delivery sequence, legal/illegal delivery counts, batter runs, numeric extra runs, reconstructed total runs, and wickets by innings.",
         "",
         "## Reproduction",
         "",
