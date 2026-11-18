@@ -82,3 +82,13 @@ The supplied pack contains IPL/T20 data and T20I data from 2022 onward. The main
 ## Reproducibility
 
 The script uses `pandas` and validates the expected many-to-one relationship between competitions and matches. It fails loudly if the join would duplicate match rows or leave competition metadata unmatched.
+
+## Post-retention PPI update
+
+The `outputs/post_retention/` files apply the 10 supplied IPL retention lists, including Rajasthan Royals' own retained squad, to the Day 6 eligible PPI pools. They also exclude Pakistan players as unavailable for IPL selection. This is an availability filter: the original PPI values remain unchanged, while retained or otherwise unavailable players are removed and the remaining players receive post-retention ranks.
+
+```bash
+python scripts/post_retention_ppi.py \
+  --ranking-dir outputs/day6 \
+  --output-dir outputs/post_retention
+```
