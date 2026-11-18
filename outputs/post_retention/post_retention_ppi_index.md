@@ -1,29 +1,27 @@
 # Post-retention PPI index
 
-**Status: Final revised filters applied.**
+**Status: Updated with revised innings thresholds.**
 
-## Batting filters
-- Minimum 40 innings
+## Active filters
+
+### Batting
+- Minimum 30 innings
 - Minimum 1,200 runs
 
-The strike-rate criterion, 800-balls-faced criterion, and batting top-tier-innings add-on have been removed.
-
-## Bowling filters
-- Minimum 35 bowling innings
+### Bowling
+- Minimum 27 bowling innings
 - Minimum 45 wickets
 - Minimum 12 IPL/T20I innings
 
-The 660 legal-ball/110-over minimum has been removed.
+The 800-ball, strike-rate, and batting top-tier add-ons are removed. The 660-ball/110-over bowling minimum is also removed.
 
 ## Final result
 
-- Available batters after all filters: **2**.
-- Available bowlers after all filters: **9**.
+- Available batters after all filters: **3**.
+- Available bowlers after all filters: **10**.
 - Tilak Varma is excluded as Mumbai Indians-retained.
 - Mitchell Starc is excluded because he opted out.
-- No ineligible player is added to force a top-10 list.
-
-An exact 10-batter and 10-bowler output is still not possible after the remaining statistical, availability, Pakistan, role, mentor, and country rules.
+- Country diversity, Pakistan, role, mentor, and all retention rules remain active.
 
 ## Available batters
 
@@ -31,19 +29,23 @@ An exact 10-batter and 10-bowler output is still not possible after the remainin
 |---:|---|---|---:|
 | 1 | Ibrahim Zadran | Afghanistan | 76.65 |
 | 2 | Towhid Hridoy | Bangladesh | 71.20 |
+| 3 | Reeza Hendricks | South Africa | 67.95 |
 
 ## Available bowlers
 
 | Rank | Player | Country | PPI |
 |---:|---|---|---:|
 | 1 | Mohammad Rishad Hossain | Bangladesh | 76.75 |
-| 2 | Naveen ul Haq | Afghanistan | 69.90 |
-| 3 | Dushmantha Chameera | Sri Lanka | 65.58 |
-| 4 | Tim Southee | New Zealand | 60.96 |
-| 5 | Alzarri Joseph | West Indies | 56.40 |
-| 6 | Blessing Muzarabani | Zimbabwe | 55.60 |
-| 7 | Joshua Little | Ireland | 51.38 |
-| 8 | Avesh Khan | India | 50.59 |
-| 9 | Adil Rashid | England | 42.92 |
+| 2 | Mohit Sharma | India | 72.23 |
+| 3 | Naveen ul Haq | Afghanistan | 69.90 |
+| 4 | Dushmantha Chameera | Sri Lanka | 65.58 |
+| 5 | Tim Southee | New Zealand | 60.96 |
+| 6 | Alzarri Joseph | West Indies | 56.40 |
+| 7 | Blessing Muzarabani | Zimbabwe | 55.60 |
+| 8 | Joshua Little | Ireland | 51.38 |
+| 9 | Avesh Khan | India | 50.59 |
+| 10 | Adil Rashid | England | 42.92 |
 
-Full individual eligibility results are in `batting_eligibility_audit.csv` and `bowling_eligibility_audit.csv`.
+The batting panel still has fewer than 10 eligible, available, country-compliant candidates, so it is not padded with ineligible players.
+
+Full pass/fail details are in `batting_eligibility_audit.csv` and `bowling_eligibility_audit.csv`.
