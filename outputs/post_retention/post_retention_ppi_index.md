@@ -1,11 +1,11 @@
 # Post-retention PPI index
 
-**Status: Conditional batting-runs rule applied.**
+**Status: Batting minimum innings reduced to 25.**
 
 ## Active filters
 
 ### Batting
-- Minimum 30 innings
+- Minimum 25 innings
 - Positions 1–5 (top/middle order): minimum 500 runs
 - Position 6 or lower (finisher): minimum 300 runs
 
@@ -15,8 +15,6 @@ Each player’s role is assigned from their most frequent recorded batting posit
 - Minimum 27 bowling innings
 - Minimum 30 wickets
 - Minimum 12 IPL/T20I innings
-
-The batting balls-faced, strike-rate, and top-tier add-ons are removed. The bowling 660-ball/110-over minimum is also removed.
 
 ## Final result
 
