@@ -1,0 +1,336 @@
+SupeRR Selector Season 2
+Detailed Performance Pressure Index (PPI) Methodology
+========================================================
+
+Purpose
+-------
+The Performance Pressure Index (PPI) is a ranking framework designed to identify players whose performance is strong specifically in difficult match situations. It does not rank players only by aggregate career runs, wickets, or reputation. Instead, it compares performance under pressure with performance in ordinary situations, while also considering match context, consistency, and the amount of pressure exposure available in the data.
+
+The repository produces separate PPI rankings for batters and bowlers. The same overall structure is used for both roles, but the component metrics are role-specific.
+
+1. Data and reproducible pipeline
+---------------------------------
+The workflow starts from the supplied match, competition, and ball-by-ball CSV files. Raw ZIP and CSV files are not committed to GitHub. The main processing stages are:
+
+Day 1: inventory the files, schemas, identifiers, competitions, formats, seasons, and stages.
+Day 2: validate delivery semantics, extras, wickets, score reconstruction, and legal deliveries.
+Day 3: reconstruct match state before every delivery.
+Day 4: classify delivery pressure as Ordinary, Practical, or Desperation.
+Day 5: aggregate batting and bowling performance in pressure and normal segments.
+Day 6: calculate transparent PPI scores and rankings.
+Day 7: validate rank stability, sample dominance, eligibility, exclusions, and final submission outputs.
+
+The principal scripts are:
+
+- scripts/day3_match_state.py
+- scripts/day4_pressure_labels.py
+- scripts/day5_player_metrics.py
+- scripts/day6_ppi_rankings.py
+- scripts/day7_final_validation.py
+- scripts/post_retention_ppi.py
+
+2. Delivery and score reconstruction
+------------------------------------
+The updated ball-by-ball file contains a numeric extras amount in extras1_runs. The adopted score rule is:
+
+    total_runs = runs + extras1_runs
+
+The earlier one-run-per-extra-event approximation is not used in the current pipeline. The extras type remains useful as a category label, while extras_2_runs is ignored under the approved data interpretation.
+
+The match-state pipeline tracks the score before each delivery, wickets before the delivery, legal balls, balls remaining, target, runs required, required run rate, innings phase, current run rate, projected final score, competition, format, season, stage, and knockout context.
+
+A legal delivery is determined from the delivery fields and is used for balls faced, legal balls bowled, rates, and remaining resources. The score and state are calculated before the outcome of the current delivery so that the delivery outcome does not leak into its own pressure label.
+
+3. Pressure classification
+--------------------------
+Pressure is classified from match state rather than from the result of the current delivery. This prevents outcome leakage.
+
+3.1 Stage pressure
+
+The stage adjustment is:
+
+- League: 0 points
+- Other: 3 points
+- Knockout: 10 points
+- Final: 15 points
+
+3.2 Second-innings pressure
+
+For a chase, the pressure score combines:
+
+- Required-rate pressure: 40 points
+- Ball-resource pressure: 25 points
+- Wicket-resource pressure: 20 points
+- Stage pressure: up to 15 points
+
+Required-rate pressure is calculated using a percentile rank within match format and innings phase. Ball pressure rises as legal balls remaining fall. Wicket pressure rises as wickets are lost.
+
+A chase delivery is labelled Practical pressure when runs are still required and the second-innings pressure score is at least 75.
+
+A Practical-pressure delivery becomes Desperation pressure when:
+
+- The pressure score is at least 90; and
+- There are 18 or fewer legal balls remaining, or at least seven wickets have already fallen.
+
+3.3 First-innings pressure
+
+First-innings pressure is exploratory because there is no target yet. It combines:
+
+- Wicket pressure: 35 points
+- Late-innings ball-resource pressure: 30 points
+- Projected-score deficit versus the peer scoring environment: 20 points
+- Stage pressure: up to 15 points
+
+First-innings Practical pressure requires a score of at least 75. First-innings Desperation pressure additionally requires 18 or fewer legal balls remaining and at least six wickets lost.
+
+4. Day 5 performance metrics
+----------------------------
+Every delivery is assigned to either the Pressure segment or the Normal segment. A delivery belongs to Pressure when the Practical-pressure flag is true. All other deliveries form the Normal baseline.
+
+4.1 Batting metrics
+
+Batting metrics include:
+
+- Legal balls faced
+- Runs off the bat
+- Dismissals of the batter
+- Boundary events
+- Dot balls
+- Matches represented
+- Strike rate
+- Dot-ball rate
+- Boundary rate
+- Dismissal rate
+- Mean pressure score
+
+Batting dismissals use the dismissed-player identifier where available. Retire Out is handled separately. Runs off the bat are used for batting scoring, while legal deliveries are used for balls faced.
+
+4.2 Bowling metrics
+
+Bowling metrics include:
+
+- Legal balls bowled
+- Runs conceded by the bowler
+- Bowler-attributable wickets
+- Boundaries conceded
+- Dot balls
+- Matches represented
+- Economy rate
+- Dot-ball rate
+- Wicket rate per legal ball
+- Boundary-concession rate
+- Mean pressure score
+
+Bowler wickets are limited to bowler-attributable dismissal types: Caught, Bowled, LBW, Stumped, and Hit Wicket. Run outs, retired hurt, obstructing the field, and similar dismissals are not credited as bowler wickets.
+
+Byes, leg-byes, and penalty runs are excluded from bowler runs conceded. This prevents the bowler from being penalized for runs not charged to the bowler.
+
+Consistency is calculated from player-match pressure performance. Batters use pressure strike-rate variation across matches with at least five pressure balls. Bowlers use pressure-economy variation across matches with at least six pressure balls.
+
+5. Eligibility before ranking
+-----------------------------
+The Day 6 PPI ranking first applies exposure requirements. The post-retention ranking then applies the stricter player eligibility and availability rules.
+
+Day 6 pressure-exposure gate:
+
+- Minimum 100 overall balls for batters and bowlers in the ranking source
+- Minimum 20 pressure balls in the base Day 6 ranking
+- Minimum 3 pressure matches in the base Day 6 ranking
+
+The post-retention replacement pipeline uses a lower pressure-exposure gate of at least five pressure balls in at least one pressure match so that replacement candidates can be evaluated consistently after availability filtering.
+
+Current post-retention batting eligibility:
+
+- Minimum 25 batting innings
+- Batting position 1–5: minimum 500 runs
+- Batting position 6 or lower: minimum 300 runs
+
+A player’s typical batting position is the mode of the recorded batting_order field across that player’s deliveries. Positions 1, 2, and 3 are top order; positions 4 and 5 are middle order; positions 6 and lower are treated as finishers.
+
+Current post-retention bowling eligibility:
+
+- Minimum 27 bowling innings
+- Minimum 30 wickets
+- Minimum 12 IPL/T20I innings
+
+The following criteria were intentionally removed during the iterative design process:
+
+- Batting minimum balls faced
+- Batting strike-rate minimum
+- Batting top-tier-innings add-on
+- Bowling minimum legal balls / overs
+
+The audits record the individual metrics, assigned batting role, required runs, pass/fail flags, and failed-rule explanations.
+
+6. Batting PPI calculation
+--------------------------
+The batting PPI is a weighted score from 0 to 100. The individual components are percentile-normalized across the eligible ranking pool.
+
+6.1 Pressure absolute performance
+
+Pressure absolute score:
+
+    50% pressure strike-rate percentile
+  + 25% inverse pressure dot-ball-rate percentile
+  + 25% inverse pressure dismissal-rate percentile
+
+A higher pressure strike rate is better. Lower dot-ball and dismissal rates are better.
+
+6.2 Pressure retention
+
+Pressure strike-rate retention compares pressure strike rate with normal strike rate:
+
+    pressure strike-rate retention = pressure strike rate / normal strike rate
+
+The ratio is converted into a percentile score. A player who maintains or improves strike rate under pressure receives a stronger retention score.
+
+6.3 Consistency
+
+Raw consistency is calculated as:
+
+    1 / (1 + pressure-match strike-rate standard deviation / pressure strike rate)
+
+This is then percentile-normalized. Lower match-to-match variation produces a higher consistency score.
+
+6.4 Context and reliability
+
+Context score is the percentile of the player’s average pressure score during pressure deliveries.
+
+Reliability is based on pressure-ball exposure:
+
+    reliability = 100 * min(1, sqrt(pressure balls / 50))
+
+The score is capped at 100. Confidence labels are also reported:
+
+- High: at least 40 pressure balls
+- Medium: at least 25 pressure balls
+- Low: below 25 pressure balls
+
+6.5 Final batting PPI
+
+    Batting PPI =
+        40% pressure absolute performance
+      + 25% pressure strike-rate retention
+      + 15% consistency
+      + 10% pressure context
+      + 10% reliability
+
+The result is rounded to two decimals and ranked from highest to lowest.
+
+7. Bowling PPI calculation
+--------------------------
+The bowling PPI uses the same five-part structure but changes the performance metrics to bowling-specific measures.
+
+7.1 Pressure absolute performance
+
+Pressure absolute score:
+
+    35% inverse pressure economy percentile
+  + 25% pressure dot-ball-rate percentile
+  + 25% pressure wicket-rate-per-ball percentile
+  + 15% inverse pressure boundary-rate percentile
+
+Lower pressure economy and boundary-concession rates are better. Higher dot-ball and wicket rates are better.
+
+7.2 Pressure retention
+
+Pressure economy retention is:
+
+    pressure economy retention = normal economy / pressure economy
+
+A higher value indicates that the bowler maintains or improves economy under pressure. The ratio is percentile-normalized.
+
+7.3 Consistency
+
+Raw bowling consistency is:
+
+    1 / (1 + pressure-match economy standard deviation / pressure economy)
+
+This is converted into a percentile score. Lower match-to-match economy variation is rewarded.
+
+7.4 Context and reliability
+
+The context score is the percentile of average pressure score during pressure bowling deliveries.
+
+Bowling reliability is:
+
+    reliability = 100 * min(1, sqrt(pressure legal balls / 60))
+
+Confidence labels are:
+
+- High: at least 50 pressure legal balls
+- Medium: at least 30 pressure legal balls
+- Low: below 30 pressure legal balls
+
+7.5 Final bowling PPI
+
+    Bowling PPI =
+        40% pressure absolute performance
+      + 25% pressure economy retention
+      + 15% consistency
+      + 10% pressure context
+      + 10% reliability
+
+The result is rounded to two decimals and ranked from highest to lowest.
+
+8. Post-retention availability filtering
+-----------------------------------------
+After PPI is calculated, the ranking is filtered for auction availability. The supplied retention lists are transcribed into the repository script and all players retained by an IPL team are excluded from Rajasthan Royals’ available pool, including players retained by Rajasthan Royals themselves.
+
+Additional manual exclusions currently include:
+
+- Pakistan players unavailable for IPL selection
+- Patrick Cummins and Nitish Reddy as retained by SRH
+- Andre Russell because he is not playing in the IPL
+- Matthew Wade because he is unlikely to play in the next IPL cycle
+- Dhoni as a CSK mentor rather than an auction playing candidate
+- Rasikh Salam as RCB-retained
+- Tilak Varma as MI-retained
+- Mitchell Starc because he opted out
+- Shikhar Dhawan because he retired
+- Tim Southee because he is a KKR bowling coach
+- Ish Sodhi, Maheesh Theekshana, and Alzarri Joseph are excluded from the batter pool as bowler/part-time batting profiles
+- Chamika Karunaratne is excluded from the batter pool as a bowling all-rounder
+- Nitish Reddy is excluded from the bowler pool as SRH-retained
+
+Country diversity is no longer used as a constraint. Country is retained as a display and audit field, but repeated countries and more than three Indian players are allowed. The final output is therefore the highest-PPI available players after eligibility and manual availability filters.
+
+9. Ranking, validation, and limitations
+---------------------------------------
+The final post-retention tables are sorted by PPI in descending order. The final chart also displays the highest PPI at the top and the lowest PPI at the bottom.
+
+Day 7 validation checks include:
+
+- Sensitivity to eligibility and pressure thresholds
+- One-match dominance
+- Sample-size sufficiency
+- Player-name consistency
+- Rank stability
+- Exclusion correctness
+- Absence of raw ZIP and CSV files from Git
+
+Important limitations:
+
+1. The available data and competition metadata determine how accurately IPL and T20I top-tier innings can be identified.
+2. Batting role is assigned from the most frequent recorded batting position; a player can have a flexible role across matches.
+3. The pressure model is a transparent prototype rather than a learned causal model.
+4. Percentile normalization makes PPI relative to the eligible pool, so scores can change when the candidate population changes.
+5. A player’s PPI is not a prediction of future performance or a guarantee of auction success.
+6. Manual availability information must be updated whenever teams announce new retentions, retirements, coaching appointments, or opt-outs.
+
+10. Reproduction commands
+-------------------------
+From the repository root, the main pipeline can be reproduced with commands similar to:
+
+    python scripts/day2_delivery_validation.py --input-dir /path/to/data --output-dir outputs/day2
+    python scripts/day3_match_state.py --input-dir /path/to/data --output-dir outputs/day3
+    python scripts/day4_pressure_labels.py --input-dir /path/to/data --output-dir outputs/day4
+    python scripts/day5_player_metrics.py --input-dir /path/to/data --output-dir outputs/day5
+    python scripts/day6_ppi_rankings.py --metrics-dir outputs/day5 --output-dir outputs/day6
+    PYTHONPATH=scripts python scripts/post_retention_ppi.py \
+        --ranking-dir outputs/day6 \
+        --metrics-dir outputs/day5 \
+        --input-dir /path/to/data \
+        --output-dir outputs/post_retention
+
+The final post-retention folder contains the top-10 CSV tables, individual eligibility audits, exclusion audit, methodology summary, and PPI chart.
