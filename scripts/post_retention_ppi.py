@@ -27,7 +27,8 @@ ALIASES = {
     "mohammedsiraj": "mohdsiraj",
     "mohammedshami": "mohdshami",
     "mohammedarshadkhan": "mohdarshadkhan",
-    "r sai kishore": "rsai kishore",
+    "patcummins": "patrickcummins",
+    "nitishreddy": "nitishkumareddy",
     "rsai kishore": "rsai kishore",
 }
 
@@ -36,6 +37,21 @@ PAKISTAN_PLAYERS = {
     "Abrar Ahmed",
     "Mohammad Saifuddin",
     "Naseem Shah",
+}
+
+MANUAL_BATTER_EXCLUSIONS = {
+    "Ish Sodhi": "Bowler/part-time batting profile — not counted as a proper batter",
+    "Maheesh Theekshana": "Bowler/part-time batting profile — not counted as a proper batter",
+    "Alzarri Joseph": "Bowler profile — not counted as a proper batter",
+    "Chamika Karunaratne": "Bowling all-rounder — not counted as a proper batter",
+}
+
+MANUAL_GLOBAL_EXCLUSIONS = {
+    "Andre Russell": "Not playing in the IPL",
+}
+
+MANUAL_BOWLER_EXCLUSIONS = {
+    "Nitish Reddy": "Retained by Sunrisers Hyderabad",
 }
 
 
@@ -53,7 +69,7 @@ def retention_table() -> pd.DataFrame:
     return pd.DataFrame(rows).drop_duplicates(["team", "name_key"])
 
 
-def filter_rankings(df: pd.DataFrame, name_col: str, retention: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+def filter_rankings(df: pd.DataFrame, name_col: str, retention: pd.DataFrame, category: str) -> tuple[pd.DataFrame, pd.DataFrame]:
     retained = retention.groupby("name_key", as_index=True).agg(
         team=("team", lambda s: "; ".join(sorted(set(s)))),
         rr_owned=("rr_owned", "max"),
@@ -63,9 +79,13 @@ def filter_rankings(df: pd.DataFrame, name_col: str, retention: pd.DataFrame) ->
     x["retained_by"] = x["name_key"].map(retained["team"])
     x["retained_by_rr"] = x["name_key"].map(retained["rr_owned"]).fillna(False).astype(bool)
     x["pakistan_excluded"] = x[name_col].isin(PAKISTAN_PLAYERS)
+    manual = dict(MANUAL_GLOBAL_EXCLUSIONS)
+    manual.update(MANUAL_BATTER_EXCLUSIONS if category == "batting" else MANUAL_BOWLER_EXCLUSIONS)
+    x["manual_exclusion_reason"] = x[name_col].map(manual).fillna("")
     x["removal_reason"] = ""
     x.loc[x.retained_by.notna(), "removal_reason"] = "Retained by IPL team"
     x.loc[x.pakistan_excluded, "removal_reason"] = "Pakistan player — unavailable for IPL selection"
+    x.loc[x.manual_exclusion_reason.ne(""), "removal_reason"] = x.loc[x.manual_exclusion_reason.ne(""), "manual_exclusion_reason"]
     removed = x[x.removal_reason.ne("")].copy()
     available = x[x.removal_reason.eq("")].copy()
     available["post_retention_rank"] = range(1, len(available) + 1)
@@ -83,8 +103,8 @@ def main() -> None:
     retention.to_csv(args.output_dir / "retained_players.csv", index=False)
     bat = pd.read_csv(args.ranking_dir / "batting_ppi_eligible.csv")
     bowl = pd.read_csv(args.ranking_dir / "bowling_ppi_eligible.csv")
-    bat_avail, bat_removed = filter_rankings(bat, "striker_name", retention)
-    bowl_avail, bowl_removed = filter_rankings(bowl, "bowler_name", retention)
+    bat_avail, bat_removed = filter_rankings(bat, "striker_name", retention, "batting")
+    bowl_avail, bowl_removed = filter_rankings(bowl, "bowler_name", retention, "bowling")
     bat_avail.to_csv(args.output_dir / "post_retention_batting_ppi.csv", index=False)
     bowl_avail.to_csv(args.output_dir / "post_retention_bowling_ppi.csv", index=False)
     bat_avail.head(10).to_csv(args.output_dir / "post_retention_top10_batting_ppi.csv", index=False)
@@ -97,6 +117,8 @@ def main() -> None:
         "# Post-retention PPI update",
         "",
         "This ranking update applies the retention lists supplied in the 10 screenshots on November 18, 2026. It removes all players retained by any IPL team, including players already retained by Rajasthan Royals, because those players are unavailable for Rajasthan Royals to buy at auction. It also removes Pakistan players because they are unavailable for IPL selection.",
+        "",
+        "The subsequent manual update additionally removes Patrick Cummins and Nitish Reddy as SRH-retained, Andre Russell as not playing in the IPL, and the requested bowling/bowling-all-rounder profiles from the batter list: Ish Sodhi, Patrick Cummins, Maheesh Theekshana, Alzarri Joseph, and Chamika Karunaratne.",
         "",
         "This is a post-retention availability filter, not a recalculation of player performance. PPI values remain unchanged; only unavailable players are removed and the remaining players are re-ranked.",
         "",
