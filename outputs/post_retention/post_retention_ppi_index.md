@@ -1,16 +1,16 @@
 # Post-retention PPI index
 
-**Status: Updated with minimum batting runs reduced to 500.**
+**Status: Updated with 450-run batting and 30-wicket bowling thresholds.**
 
 ## Active filters
 
 ### Batting
 - Minimum 30 innings
-- Minimum 500 runs
+- Minimum 450 runs
 
 ### Bowling
 - Minimum 27 bowling innings
-- Minimum 45 wickets
+- Minimum 30 wickets
 - Minimum 12 IPL/T20I innings
 
 The batting balls-faced, strike-rate, and top-tier add-ons are removed. The bowling 660-ball/110-over minimum is also removed.
@@ -46,8 +46,8 @@ The batting balls-faced, strike-rate, and top-tier add-ons are removed. The bowl
 | 3 | Naveen ul Haq | Afghanistan | 69.90 |
 | 4 | Dushmantha Chameera | Sri Lanka | 65.58 |
 | 5 | Tim Southee | New Zealand | 60.96 |
-| 6 | Alzarri Joseph | West Indies | 56.40 |
-| 7 | Blessing Muzarabani | Zimbabwe | 55.60 |
+| 6 | Richard Ngarava | Zimbabwe | 57.70 |
+| 7 | Alzarri Joseph | West Indies | 56.40 |
 | 8 | Joshua Little | Ireland | 51.38 |
 | 9 | Avesh Khan | India | 50.59 |
 | 10 | Adil Rashid | England | 42.92 |
