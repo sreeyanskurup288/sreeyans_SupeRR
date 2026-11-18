@@ -1,12 +1,12 @@
 # Post-retention PPI index
 
-**Status: Updated with minimum batting runs reduced to 800.**
+**Status: Updated with minimum batting runs reduced to 500.**
 
 ## Active filters
 
 ### Batting
 - Minimum 30 innings
-- Minimum 800 runs
+- Minimum 500 runs
 
 ### Bowling
 - Minimum 27 bowling innings
@@ -17,7 +17,7 @@ The batting balls-faced, strike-rate, and top-tier add-ons are removed. The bowl
 
 ## Final result
 
-- Available batters after all filters: **6**.
+- Available batters after all filters: **9**.
 - Available bowlers after all filters: **10**.
 - Tilak Varma is excluded as Mumbai Indians-retained.
 - Mitchell Starc is excluded because he opted out.
@@ -29,10 +29,13 @@ The batting balls-faced, strike-rate, and top-tier add-ons are removed. The bowl
 |---:|---|---|---:|
 | 1 | Ibrahim Zadran | Afghanistan | 76.65 |
 | 2 | Towhid Hridoy | Bangladesh | 71.20 |
-| 3 | Reeza Hendricks | South Africa | 67.95 |
-| 4 | Shikhar Dhawan | India | 56.07 |
-| 5 | Ryan Burl | Zimbabwe | 42.68 |
-| 6 | Deepak Hooda | India | 38.03 |
+| 3 | Bhanuka Rajapaksa | Sri Lanka | 69.99 |
+| 4 | Reeza Hendricks | South Africa | 67.95 |
+| 5 | Shikhar Dhawan | India | 56.07 |
+| 6 | Ryan Burl | Zimbabwe | 42.68 |
+| 7 | Deepak Hooda | India | 38.03 |
+| 8 | George Dockrell | Ireland | 22.87 |
+| 9 | M Shahrukh Khan | India | 21.08 |
 
 ## Available bowlers
 
