@@ -83,7 +83,7 @@ MANUAL_BOWLER_EXCLUSIONS = {
 POST_RETENTION_MIN_PRESSURE_BALLS = 5
 POST_RETENTION_MIN_PRESSURE_MATCHES = 1
 BAT_MIN_INNINGS = 30
-BAT_MIN_RUNS = 1200
+BAT_MIN_RUNS = 800
 BAT_MIN_BALLS = 0
 BAT_MIN_STRIKE_RATE = 0
 BAT_MIN_TOP_TIER_INNINGS = 0
@@ -219,7 +219,7 @@ def build_eligibility(input_dir: Path, bat: pd.DataFrame, bowl: pd.DataFrame, ou
     bat_a["pass_top_tier"] = bat_a.top_tier_innings >= BAT_MIN_TOP_TIER_INNINGS
     bat_a["eligible_batting"] = bat_a[["pass_innings", "pass_runs"]].all(axis=1)
     bat_a["failed_batting_rules"] = bat_a.apply(lambda r: "; ".join([
-        "innings<30" if not r.pass_innings else "", "runs<1200" if not r.pass_runs else "",
+        "innings<30" if not r.pass_innings else "", "runs<800" if not r.pass_runs else "",
         "top_tier_innings<15" if not r.pass_top_tier else ""]), axis=1).str.strip("; ").str.replace("; ;", ";", regex=False)
     bowl_a["pass_innings"] = bowl_a.total_innings_bowled >= BOWL_MIN_INNINGS
     bowl_a["pass_balls"] = bowl_a.total_balls_bowled >= BOWL_MIN_BALLS
@@ -276,7 +276,7 @@ def main() -> None:
         "Matthew Wade is also excluded because he is unlikely to play in the next IPL cycle.",
         "Mahendra Singh Dhoni is excluded as a CSK mentor, Rasikh Salam is excluded as retained by Royal Challengers Bengaluru, Namboori Tilak Varma is excluded as retained by Mumbai Indians, and Mitchell Starc is excluded because he opted out.",
         "",
-        "The same PPI formula is used. Batting eligibility requires exactly two filters: at least 30 innings and 1,200 runs. Bowling eligibility requires at least 27 innings, 45 wickets, and 12 top-tier innings; the 660-ball overs minimum has been removed. Each panel allows at most one player per non-India country and at most three Indian players; lower-exposure replacements are marked with lower confidence.",
+        "The same PPI formula is used. Batting eligibility requires exactly two filters: at least 30 innings and 800 runs. Bowling eligibility requires at least 27 innings, 45 wickets, and 12 top-tier innings; the 660-ball overs minimum has been removed. Each panel allows at most one player per non-India country and at most three Indian players; lower-exposure replacements are marked with lower confidence.",
         "",
         f"- Retained-player rows transcribed: {len(retention)}",
         f"- Expanded batting candidate pool before filter: {len(bat)}; removed: {len(bat_removed)}; available: {len(bat_avail)}",

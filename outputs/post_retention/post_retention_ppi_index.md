@@ -1,23 +1,23 @@
 # Post-retention PPI index
 
-**Status: Updated with revised innings thresholds.**
+**Status: Updated with minimum batting runs reduced to 800.**
 
 ## Active filters
 
 ### Batting
 - Minimum 30 innings
-- Minimum 1,200 runs
+- Minimum 800 runs
 
 ### Bowling
 - Minimum 27 bowling innings
 - Minimum 45 wickets
 - Minimum 12 IPL/T20I innings
 
-The 800-ball, strike-rate, and batting top-tier add-ons are removed. The 660-ball/110-over bowling minimum is also removed.
+The batting balls-faced, strike-rate, and top-tier add-ons are removed. The bowling 660-ball/110-over minimum is also removed.
 
 ## Final result
 
-- Available batters after all filters: **3**.
+- Available batters after all filters: **6**.
 - Available bowlers after all filters: **10**.
 - Tilak Varma is excluded as Mumbai Indians-retained.
 - Mitchell Starc is excluded because he opted out.
@@ -30,6 +30,9 @@ The 800-ball, strike-rate, and batting top-tier add-ons are removed. The 660-bal
 | 1 | Ibrahim Zadran | Afghanistan | 76.65 |
 | 2 | Towhid Hridoy | Bangladesh | 71.20 |
 | 3 | Reeza Hendricks | South Africa | 67.95 |
+| 4 | Shikhar Dhawan | India | 56.07 |
+| 5 | Ryan Burl | Zimbabwe | 42.68 |
+| 6 | Deepak Hooda | India | 38.03 |
 
 ## Available bowlers
 
@@ -46,6 +49,6 @@ The 800-ball, strike-rate, and batting top-tier add-ons are removed. The 660-bal
 | 9 | Avesh Khan | India | 50.59 |
 | 10 | Adil Rashid | England | 42.92 |
 
-The batting panel still has fewer than 10 eligible, available, country-compliant candidates, so it is not padded with ineligible players.
+The batting panel has fewer than 10 eligible, available, country-compliant candidates, so it is not padded with ineligible players.
 
 Full pass/fail details are in `batting_eligibility_audit.csv` and `bowling_eligibility_audit.csv`.

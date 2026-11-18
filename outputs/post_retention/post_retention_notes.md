@@ -6,12 +6,12 @@ The subsequent manual update additionally removes Patrick Cummins and Nitish Red
 Matthew Wade is also excluded because he is unlikely to play in the next IPL cycle.
 Mahendra Singh Dhoni is excluded as a CSK mentor, Rasikh Salam is excluded as retained by Royal Challengers Bengaluru, Namboori Tilak Varma is excluded as retained by Mumbai Indians, and Mitchell Starc is excluded because he opted out.
 
-The same PPI formula is used. Batting eligibility requires exactly two filters: at least 30 innings and 1,200 runs. Bowling eligibility requires at least 27 innings, 45 wickets, and 12 top-tier innings; the 660-ball overs minimum has been removed. Each panel allows at most one player per non-India country and at most three Indian players; lower-exposure replacements are marked with lower confidence.
+The same PPI formula is used. Batting eligibility requires exactly two filters: at least 30 innings and 800 runs. Bowling eligibility requires at least 27 innings, 45 wickets, and 12 top-tier innings; the 660-ball overs minimum has been removed. Each panel allows at most one player per non-India country and at most three Indian players; lower-exposure replacements are marked with lower confidence.
 
 - Retained-player rows transcribed: 186
-- Expanded batting candidate pool before filter: 12; removed: 9; available: 3
+- Expanded batting candidate pool before filter: 21; removed: 15; available: 6
 - Expanded bowling candidate pool before filter: 70; removed: 46; available: 10
-- Final output size: 3 eligible batters and 10 eligible bowlers. The batting list is not padded when fewer than 10 players satisfy every rule.
+- Final output size: 6 eligible batters and 10 eligible bowlers. The batting list is not padded when fewer than 10 players satisfy every rule.
 - Eligibility audit files report every individual minimum and failed rule.
 
 ## Outputs
