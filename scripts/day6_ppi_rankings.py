@@ -27,9 +27,9 @@ def safe_ratio(a: pd.Series, b: pd.Series) -> pd.Series:
     return (a / b.replace(0, np.nan)).replace([np.inf, -np.inf], np.nan)
 
 
-def bat_ranking(df: pd.DataFrame) -> pd.DataFrame:
+def bat_ranking(df: pd.DataFrame, min_pressure_balls: int = MIN_PRESSURE_BALLS, min_pressure_matches: int = MIN_PRESSURE_MATCHES) -> pd.DataFrame:
     x = df.copy()
-    x = x[(x.overall_balls >= BAT_MIN_TOTAL) & (x.pressure_balls >= MIN_PRESSURE_BALLS) & (x.pressure_matches >= MIN_PRESSURE_MATCHES)].copy()
+    x = x[(x.overall_balls >= BAT_MIN_TOTAL) & (x.pressure_balls >= min_pressure_balls) & (x.pressure_matches >= min_pressure_matches)].copy()
     x["pressure_absolute_score"] = (
         0.50 * percentile(x.pressure_strike_rate)
         + 0.25 * percentile(x.pressure_dot_ball_rate, higher_is_better=False)
@@ -55,9 +55,9 @@ def bat_ranking(df: pd.DataFrame) -> pd.DataFrame:
     return x.sort_values(["PPI", "pressure_balls"], ascending=[False, False])
 
 
-def bowl_ranking(df: pd.DataFrame) -> pd.DataFrame:
+def bowl_ranking(df: pd.DataFrame, min_pressure_balls: int = MIN_PRESSURE_BALLS, min_pressure_matches: int = MIN_PRESSURE_MATCHES) -> pd.DataFrame:
     x = df.copy()
-    x = x[(x.overall_legal_balls >= BOWL_MIN_TOTAL) & (x.pressure_legal_balls >= MIN_PRESSURE_BALLS) & (x.pressure_matches >= MIN_PRESSURE_MATCHES)].copy()
+    x = x[(x.overall_legal_balls >= BOWL_MIN_TOTAL) & (x.pressure_legal_balls >= min_pressure_balls) & (x.pressure_matches >= min_pressure_matches)].copy()
     x["pressure_absolute_score"] = (
         0.35 * percentile(x.pressure_economy, higher_is_better=False)
         + 0.25 * percentile(x.pressure_dot_ball_rate)

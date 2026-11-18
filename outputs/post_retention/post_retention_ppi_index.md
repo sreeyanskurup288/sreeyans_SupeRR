@@ -2,40 +2,47 @@
 
 **Status: Updated after post-retention, role, and player-availability filtering.**
 
-PPI scores are unchanged from Day 6. Unavailable players and non-proper batting profiles were removed, and the remaining players were re-ranked for Rajasthan Royals auction availability.
+Both panels contain exactly 10 players. The same PPI formula is used, with a replacement-candidate threshold of at least 100 overall balls, 12 pressure balls, and 2 pressure matches.
 
-Available batting pool: **3** players.
+PPI scores are recalculated for the expanded qualifying candidate pool; lower-exposure replacements are marked with lower confidence.
 
 ## Available batting ranking
 
-| Post-retention rank | Player | PPI |
-|---:|---|---:|
-| 3 | Wellington Masakadza | 58.98 |
-| 2 | Towhid Hridoy | 75.48 |
-| 1 | Matthew Wade | 81.93 |
-
-Available bowling pool: **10** players.
+| Post-retention rank | Player | PPI | Confidence |
+|---:|---|---:|---|
+| 10 | Dushmantha Chameera | 41.65 | Low |
+| 9 | Ryan Burl | 42.49 | Low |
+| 8 | Mohammad Rishad Hossain | 50.23 | Low |
+| 7 | Tanzim Sakib | 55.73 | Low |
+| 6 | Barry McCarthy | 57.20 | Low |
+| 5 | Shamim Hossain | 62.89 | Low |
+| 4 | Wellington Masakadza | 64.39 | Medium |
+| 3 | Luke Jongwe | 68.54 | Low |
+| 2 | Towhid Hridoy | 73.99 | Medium |
+| 1 | Mahendra Singh Dhoni | 79.28 | Low |
 
 ## Available bowling ranking
 
-| Post-retention rank | Player | PPI |
-|---:|---|---:|
-| 10 | Trent Boult | 49.59 |
-| 9 | Lockie Ferguson | 51.86 |
-| 8 | Matheesha Pathirana | 56.13 |
-| 7 | Tim Southee | 57.26 |
-| 6 | FazalHaq Farooqi | 60.53 |
-| 5 | Mustafizur Rahman | 61.44 |
-| 4 | Rasikh Salam | 64.01 |
-| 3 | Maheesh Theekshana | 68.67 |
-| 2 | Mohit Sharma | 69.40 |
-| 1 | Naveen ul Haq | 73.18 |
+| Post-retention rank | Player | PPI | Confidence |
+|---:|---|---:|---|
+| 10 | Mustafizur Rahman | 60.20 | Medium |
+| 9 | Rasikh Salam | 60.38 | Low |
+| 8 | Barry McCarthy | 62.27 | Low |
+| 7 | Ripon Mondol | 62.88 | Low |
+| 6 | Shamar Joseph | 64.28 | Low |
+| 5 | Maheesh Theekshana | 66.94 | Low |
+| 4 | Naveen ul Haq | 69.08 | Medium |
+| 3 | Mohit Sharma | 70.73 | Low |
+| 2 | Chris Jordan | 76.81 | Low |
+| 1 | Spencer Johnson | 78.29 | Low |
 
 ## Additional filters applied
 
-- Removed Pat/Patrick Cummins as retained by Sunrisers Hyderabad.
-- Removed Nitish Reddy as retained by Sunrisers Hyderabad.
-- Removed Andre Russell from both lists because he is not playing in the IPL.
+- Removed players retained by any IPL team, including Rajasthan Royals.
+- Removed Pakistan players as unavailable for IPL selection.
+- Removed Patrick Cummins and Nitish Reddy as SRH-retained.
+- Removed Andre Russell because he is not playing in the IPL.
+- Removed Matthew Wade because he is unlikely to play in the next IPL cycle.
 - Removed Ish Sodhi, Maheesh Theekshana, and Alzarri Joseph from batters because they are bowling profiles.
 - Removed Chamika Karunaratne from batters because he is a bowling all-rounder.
 - Kept Maheesh Theekshana in the bowling list.

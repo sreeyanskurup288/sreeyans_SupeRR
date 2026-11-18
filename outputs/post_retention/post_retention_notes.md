@@ -3,12 +3,14 @@
 This ranking update applies the retention lists supplied in the 10 screenshots on November 18, 2026. It removes all players retained by any IPL team, including players already retained by Rajasthan Royals, because those players are unavailable for Rajasthan Royals to buy at auction. It also removes Pakistan players because they are unavailable for IPL selection.
 
 The subsequent manual update additionally removes Patrick Cummins and Nitish Reddy as SRH-retained, Andre Russell as not playing in the IPL, and the requested bowling/bowling-all-rounder profiles from the batter list: Ish Sodhi, Patrick Cummins, Maheesh Theekshana, Alzarri Joseph, and Chamika Karunaratne.
+Matthew Wade is also excluded because he is unlikely to play in the next IPL cycle.
 
-This is a post-retention availability filter, not a recalculation of player performance. PPI values remain unchanged; only unavailable players are removed and the remaining players are re-ranked.
+This is a post-retention availability filter, not a recalculation of player performance. The same PPI formula is used. To preserve an exact top-10 output after the availability and role exclusions, the candidate pool uses at least 100 overall balls and at least 12 pressure balls across at least 2 pressure matches; lower-exposure replacements are marked with lower confidence.
 
 - Retained-player rows transcribed: 186
-- Batting PPI players before filter: 17; removed: 14; available after retention: 3
-- Bowling PPI players before filter: 45; removed: 30; available after retention/eligibility filter: 15
+- Expanded batting candidate pool before filter: 46; removed: 31; available: 15
+- Expanded bowling candidate pool before filter: 84; removed: 47; available: 37
+- Final output size: top 10 batters and top 10 bowlers.
 
 ## Outputs
 

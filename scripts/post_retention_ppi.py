@@ -10,6 +10,8 @@ from pathlib import Path
 
 import pandas as pd
 
+from day6_ppi_rankings import bat_ranking, bowl_ranking
+
 RETENTIONS = {
     "Chennai Super Kings": """Akeal Hosein|Anshul Kamboj|Ayush Mhatre|Dewald Brevis|Gurjapneet Singh|Jack Edwards|Jamie Overton|Kartik Sharma|Liam Livingstone|Mukesh Choudhary|Noor Ahmad|Rahul Chahar|Ramakrishna Ghosh|Ruturaj Gaikwad|Sanju Samson|Sarfaraz Khan|Shivam Dube|Shreyas Gopal|Urvil Patel""",
     "Delhi Capitals": """Ashutosh Sharma|Auqib Nabi|Axar Patel|David Miller|KL Rahul|Kyle Jamieson|Lungisani Ngidi|Madhav Tiwari|Mukesh Kumar|Prithvi Shaw|Rishabh Pant|Sameer Rizvi|Tripurana Vijay|Vipraj Nigam|Zeeshan Ansari|Tristan Stubbs""",
@@ -33,10 +35,29 @@ ALIASES = {
 }
 
 PAKISTAN_PLAYERS = {
+    "Babar Azam",
     "Haris Rauf",
     "Abrar Ahmed",
+    "Shaheen Afridi",
+    "Faheem Ashraf",
+    "Mohammad Nawaz",
+    "Sufiyan Muqeem",
     "Mohammad Saifuddin",
     "Naseem Shah",
+    "Mohammad Rizwan",
+    "Shadab Khan",
+    "Imad Wasim",
+    "Fakhar Zaman",
+    "Iftikhar Ahmed",
+    "Azam Khan",
+    "Saim Ayub",
+    "Usama Mir",
+    "Mohammad Amir",
+    "Khushdil Shah",
+    "Hasan Ali",
+    "Mohammad Hasnain",
+    "Shahnawaz Dahani",
+    "Haider Ali",
 }
 
 MANUAL_BATTER_EXCLUSIONS = {
@@ -48,11 +69,15 @@ MANUAL_BATTER_EXCLUSIONS = {
 
 MANUAL_GLOBAL_EXCLUSIONS = {
     "Andre Russell": "Not playing in the IPL",
+    "Matthew Wade": "Unlikely to play in the next IPL cycle",
 }
 
 MANUAL_BOWLER_EXCLUSIONS = {
     "Nitish Reddy": "Retained by Sunrisers Hyderabad",
 }
+
+POST_RETENTION_MIN_PRESSURE_BALLS = 12
+POST_RETENTION_MIN_PRESSURE_MATCHES = 2
 
 
 def norm(name: str) -> str:
@@ -96,13 +121,19 @@ def filter_rankings(df: pd.DataFrame, name_col: str, retention: pd.DataFrame, ca
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--ranking-dir", type=Path, required=True)
+    parser.add_argument("--metrics-dir", type=Path, default=None)
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
     retention = retention_table()
     retention.to_csv(args.output_dir / "retained_players.csv", index=False)
-    bat = pd.read_csv(args.ranking_dir / "batting_ppi_eligible.csv")
-    bowl = pd.read_csv(args.ranking_dir / "bowling_ppi_eligible.csv")
+    metrics_dir = args.metrics_dir or (args.ranking_dir.parent / "day5")
+    bat_source = pd.read_csv(metrics_dir / "batting_metrics.csv")
+    bowl_source = pd.read_csv(metrics_dir / "bowling_metrics.csv")
+    # Keep the Day 6 minimum of 100 overall balls, but relax pressure exposure
+    # only enough to fill the requested top-10 availability lists.
+    bat = bat_ranking(bat_source, POST_RETENTION_MIN_PRESSURE_BALLS, POST_RETENTION_MIN_PRESSURE_MATCHES)
+    bowl = bowl_ranking(bowl_source, POST_RETENTION_MIN_PRESSURE_BALLS, POST_RETENTION_MIN_PRESSURE_MATCHES)
     bat_avail, bat_removed = filter_rankings(bat, "striker_name", retention, "batting")
     bowl_avail, bowl_removed = filter_rankings(bowl, "bowler_name", retention, "bowling")
     bat_avail.to_csv(args.output_dir / "post_retention_batting_ppi.csv", index=False)
@@ -119,12 +150,14 @@ def main() -> None:
         "This ranking update applies the retention lists supplied in the 10 screenshots on November 18, 2026. It removes all players retained by any IPL team, including players already retained by Rajasthan Royals, because those players are unavailable for Rajasthan Royals to buy at auction. It also removes Pakistan players because they are unavailable for IPL selection.",
         "",
         "The subsequent manual update additionally removes Patrick Cummins and Nitish Reddy as SRH-retained, Andre Russell as not playing in the IPL, and the requested bowling/bowling-all-rounder profiles from the batter list: Ish Sodhi, Patrick Cummins, Maheesh Theekshana, Alzarri Joseph, and Chamika Karunaratne.",
+        "Matthew Wade is also excluded because he is unlikely to play in the next IPL cycle.",
         "",
-        "This is a post-retention availability filter, not a recalculation of player performance. PPI values remain unchanged; only unavailable players are removed and the remaining players are re-ranked.",
+        f"This is a post-retention availability filter, not a recalculation of player performance. The same PPI formula is used. To preserve an exact top-10 output after the availability and role exclusions, the candidate pool uses at least 100 overall balls and at least {POST_RETENTION_MIN_PRESSURE_BALLS} pressure balls across at least {POST_RETENTION_MIN_PRESSURE_MATCHES} pressure matches; lower-exposure replacements are marked with lower confidence.",
         "",
         f"- Retained-player rows transcribed: {len(retention)}",
-        f"- Batting PPI players before filter: {len(bat)}; removed: {len(bat_removed)}; available after retention: {len(bat_avail)}",
-        f"- Bowling PPI players before filter: {len(bowl)}; removed: {len(bowl_removed)}; available after retention/eligibility filter: {len(bowl_avail)}",
+        f"- Expanded batting candidate pool before filter: {len(bat)}; removed: {len(bat_removed)}; available: {len(bat_avail)}",
+        f"- Expanded bowling candidate pool before filter: {len(bowl)}; removed: {len(bowl_removed)}; available: {len(bowl_avail)}",
+        f"- Final output size: top {min(10, len(bat_avail))} batters and top {min(10, len(bowl_avail))} bowlers.",
         "",
         "## Outputs",
         "",
