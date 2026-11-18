@@ -83,7 +83,9 @@ MANUAL_BOWLER_EXCLUSIONS = {
 POST_RETENTION_MIN_PRESSURE_BALLS = 5
 POST_RETENTION_MIN_PRESSURE_MATCHES = 1
 BAT_MIN_INNINGS = 30
-BAT_MIN_RUNS = 450
+BAT_TOP_MIDDLE_MIN_RUNS = 500
+BAT_FINISHER_MIN_RUNS = 300
+FINISHER_BATTING_ORDER = 6
 BAT_MIN_BALLS = 0
 BAT_MIN_STRIKE_RATE = 0
 BAT_MIN_TOP_TIER_INNINGS = 0
@@ -188,7 +190,7 @@ def enforce_country_constraint(df: pd.DataFrame, name_col: str) -> pd.DataFrame:
 def build_eligibility(input_dir: Path, bat: pd.DataFrame, bowl: pd.DataFrame, output_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Apply the user-provided batting and bowling minimums separately."""
     ball = pd.read_csv(input_dir / "ball_by_ball.csv", usecols=[
-        "match_id", "striker_name", "bowler_name", "runs", "is_wicket", "dismissal_type"
+        "match_id", "striker_name", "bowler_name", "batting_order", "runs", "is_wicket", "dismissal_type"
     ])
     matches = pd.read_csv(input_dir / "matches.csv", usecols=["match_id", "comp_id"])
     comps = pd.read_csv(input_dir / "competitions.csv", usecols=["comp_id", "comp_name", "match_format"])
@@ -202,6 +204,7 @@ def build_eligibility(input_dir: Path, bat: pd.DataFrame, bowl: pd.DataFrame, ou
         total_runs=("runs", "sum"),
         total_balls=("match_id", "size"),
         top_tier_innings=("match_id", lambda s: s[ball.loc[s.index, "top_tier"]].nunique()),
+        typical_batting_order=("batting_order", lambda s: s.dropna().mode().iloc[0] if not s.dropna().empty else 0),
     ).reset_index()
     bowl_i = ball.groupby("bowler_name").agg(
         total_innings_bowled=("match_id", "nunique"),
@@ -213,13 +216,15 @@ def build_eligibility(input_dir: Path, bat: pd.DataFrame, bowl: pd.DataFrame, ou
     bat_a = bat[["striker_name"]].drop_duplicates().merge(bat_i, on="striker_name", how="left").fillna(0)
     bowl_a = bowl[["bowler_name"]].drop_duplicates().merge(bowl_i, on="bowler_name", how="left").fillna(0)
     bat_a["pass_innings"] = bat_a.total_innings >= BAT_MIN_INNINGS
-    bat_a["pass_runs"] = bat_a.total_runs >= BAT_MIN_RUNS
+    bat_a["batting_role"] = bat_a.typical_batting_order.apply(lambda x: "Finisher" if x >= FINISHER_BATTING_ORDER else "Top/middle order")
+    bat_a["required_runs"] = bat_a.batting_role.map({"Top/middle order": BAT_TOP_MIDDLE_MIN_RUNS, "Finisher": BAT_FINISHER_MIN_RUNS})
+    bat_a["pass_runs"] = bat_a.total_runs >= bat_a.required_runs
     bat_a["strike_rate"] = bat_a.total_runs.div(bat_a.total_balls.replace(0, pd.NA)).mul(100).fillna(0)
     bat_a["pass_strike_rate"] = bat_a.strike_rate >= BAT_MIN_STRIKE_RATE
     bat_a["pass_top_tier"] = bat_a.top_tier_innings >= BAT_MIN_TOP_TIER_INNINGS
     bat_a["eligible_batting"] = bat_a[["pass_innings", "pass_runs"]].all(axis=1)
     bat_a["failed_batting_rules"] = bat_a.apply(lambda r: "; ".join([
-        "innings<30" if not r.pass_innings else "", "runs<500" if not r.pass_runs else "",
+        "innings<30" if not r.pass_innings else "", f"runs<{int(r.required_runs)}" if not r.pass_runs else "",
         "top_tier_innings<15" if not r.pass_top_tier else ""]), axis=1).str.strip("; ").str.replace("; ;", ";", regex=False)
     bowl_a["pass_innings"] = bowl_a.total_innings_bowled >= BOWL_MIN_INNINGS
     bowl_a["pass_balls"] = bowl_a.total_balls_bowled >= BOWL_MIN_BALLS
@@ -276,7 +281,7 @@ def main() -> None:
         "Matthew Wade is also excluded because he is unlikely to play in the next IPL cycle.",
         "Mahendra Singh Dhoni is excluded as a CSK mentor, Rasikh Salam is excluded as retained by Royal Challengers Bengaluru, Namboori Tilak Varma is excluded as retained by Mumbai Indians, and Mitchell Starc is excluded because he opted out.",
         "",
-        "The same PPI formula is used. Batting eligibility requires exactly two filters: at least 30 innings and 450 runs. Bowling eligibility requires at least 27 innings, 30 wickets, and 12 top-tier innings; the 660-ball overs minimum has been removed. Each panel allows at most one player per non-India country and at most three Indian players; lower-exposure replacements are marked with lower confidence.",
+        "The same PPI formula is used. Batting eligibility requires at least 30 innings plus a role-based runs minimum: positions 1–5 (top/middle order) require 500 runs, while position 6 or lower (finishers) require 300 runs. Bowling eligibility requires at least 27 innings, 30 wickets, and 12 top-tier innings; the 660-ball overs minimum has been removed. Each panel allows at most one player per non-India country and at most three Indian players; lower-exposure replacements are marked with lower confidence.",
         "",
         f"- Retained-player rows transcribed: {len(retention)}",
         f"- Expanded batting candidate pool before filter: {len(bat)}; removed: {len(bat_removed)}; available: {len(bat_avail)}",

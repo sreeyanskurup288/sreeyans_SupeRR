@@ -1,12 +1,15 @@
 # Post-retention PPI index
 
-**Status: Updated with 450-run batting and 30-wicket bowling thresholds.**
+**Status: Conditional batting-runs rule applied.**
 
 ## Active filters
 
 ### Batting
 - Minimum 30 innings
-- Minimum 450 runs
+- Positions 1–5 (top/middle order): minimum 500 runs
+- Position 6 or lower (finisher): minimum 300 runs
+
+Each player’s role is assigned from their most frequent recorded batting position. The audit includes `typical_batting_order`, `batting_role`, and `required_runs`.
 
 ### Bowling
 - Minimum 27 bowling innings
@@ -31,10 +34,10 @@ The batting balls-faced, strike-rate, and top-tier add-ons are removed. The bowl
 | 2 | Towhid Hridoy | Bangladesh | 71.20 |
 | 3 | Bhanuka Rajapaksa | Sri Lanka | 69.99 |
 | 4 | Reeza Hendricks | South Africa | 67.95 |
-| 5 | Shikhar Dhawan | India | 56.07 |
-| 6 | Ryan Burl | Zimbabwe | 42.68 |
-| 7 | Deepak Hooda | India | 38.03 |
-| 8 | George Dockrell | Ireland | 22.87 |
+| 5 | Gareth Delany | Ireland | 64.46 |
+| 6 | Shikhar Dhawan | India | 56.07 |
+| 7 | Ryan Burl | Zimbabwe | 42.68 |
+| 8 | Deepak Hooda | India | 38.03 |
 | 9 | M Shahrukh Khan | India | 21.08 |
 
 ## Available bowlers
@@ -54,4 +57,4 @@ The batting balls-faced, strike-rate, and top-tier add-ons are removed. The bowl
 
 The batting panel has fewer than 10 eligible, available, country-compliant candidates, so it is not padded with ineligible players.
 
-Full pass/fail details are in `batting_eligibility_audit.csv` and `bowling_eligibility_audit.csv`.
+Full role-level pass/fail details are in `batting_eligibility_audit.csv`; bowling details are in `bowling_eligibility_audit.csv`.
