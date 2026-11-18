@@ -1,0 +1,161 @@
+bowler_name,total_innings_bowled,total_balls_bowled,top_tier_innings,total_wickets,pass_innings,pass_balls,pass_wickets,pass_top_tier,eligible_bowling,failed_bowling_rules
+Kuldeep Yadav,89,1965,89,119.0,True,True,True,True,True,
+Sufiyan Muqeem,25,525,17,41.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Brad Evans,21,457,21,33.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Akash Madhwal,17,376,17,26.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Chris Jordan,27,574,27,20.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Jasprit Bumrah,75,1780,75,94.0,True,True,True,True,True,
+Spencer Johnson,23,466,23,25.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Mohammad Rishad Hossain,49,1033,49,62.0,True,True,True,True,True,
+Gurjapneet Singh,12,257,8,11.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+T Natarajan,49,1110,49,59.0,True,True,True,True,True,
+Harshit Rana,44,940,44,58.0,True,True,True,True,True,
+Yash Dayal,43,920,43,45.0,True,True,True,True,True,
+Kane Richardson,9,207,9,17.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+Mohammad Nawaz,52,1017,52,67.0,True,True,True,True,True,
+Mohit Sharma,33,676,33,49.0,False,True,True,True,False,innings<35
+Jediah Blades,6,131,6,6.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+Shaheen Afridi,47,1036,47,68.0,True,True,True,True,True,
+Yash Thakur,27,607,25,37.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Brijesh Sharma,13,297,13,14.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Naveen ul Haq,37,824,37,55.0,True,True,True,True,True,
+Harsh Dubey,15,273,11,17.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+Pieter Willem Mulder,10,122,10,8.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+Khaleel Ahmed,56,1267,56,64.0,True,True,True,True,True,
+Noor Ahmad,70,1537,70,87.0,True,True,True,True,True,
+Shardul Thakur,50,1047,50,56.0,True,True,True,True,True,
+Sunil Narine,67,1556,67,68.0,True,True,True,True,True,
+Allah Ghazanfar,22,467,15,28.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Kyle Jamieson,30,668,30,34.0,False,True,False,True,False,innings<35; wickets<45
+Ripon Mondol,10,242,2,24.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+Arshdeep Singh,147,3432,147,211.0,True,True,True,True,True,
+Dushmantha Chameera,53,1204,53,62.0,True,True,True,True,True,
+Anshul Kamboj,28,567,25,38.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Maheesh Theekshana,99,2322,99,99.0,True,True,True,True,True,
+Jofra Archer,56,1320,56,81.0,True,True,True,True,True,
+Mustafizur Rahman,71,1646,71,92.0,True,True,True,True,True,
+Shamar Joseph,24,515,24,33.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Tendai Chatara,10,223,10,12.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+Barry McCarthy,29,662,29,29.0,False,True,False,True,False,innings<35; wickets<45
+Andre Russell,57,792,57,66.0,True,True,True,True,True,
+Liam Dawson,22,424,22,25.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Rasikh Salam,28,571,24,38.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Yash Punja,8,186,8,9.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+Deepak Hooda,13,133,13,8.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Abrar Ahmed,35,776,35,47.0,True,True,True,True,True,
+Nandre Burger,22,468,22,22.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Mayank Yadav,22,526,22,27.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Tanzim Sakib,31,705,31,39.0,False,True,False,True,False,innings<35; wickets<45
+Wanindu Hasaranga,91,2054,91,135.0,True,True,True,True,True,
+FazalHaq Farooqi,50,1063,50,51.0,True,True,True,True,True,
+Nitish Reddy,39,595,39,31.0,True,False,False,True,False,balls<660; wickets<45
+Mohammad Saifuddin,21,475,21,29.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Tim Southee,36,861,36,57.0,True,True,True,True,True,
+Mark Wood,13,299,13,29.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Hasan Ali,8,168,8,13.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+Eshan Malinga,44,989,39,60.0,True,True,True,True,True,
+Mahedi Hasan,41,935,41,53.0,True,True,True,True,True,
+Richard Ngarava,39,889,39,42.0,True,True,False,True,False,wickets<45
+Salman Mirza,15,339,15,22.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Matheesha Pathirana,54,1279,54,89.0,True,True,True,True,True,
+Mohammad Wasim,17,374,17,21.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Mohammed Shami,57,1329,57,70.0,True,True,True,True,True,
+Lockie Ferguson,53,1138,53,68.0,True,True,True,True,True,
+Trent Boult,70,1605,70,76.0,True,True,True,True,True,
+Alzarri Joseph,53,1214,53,59.0,True,True,True,True,True,
+Dasun Shanaka,43,557,43,27.0,True,False,False,True,False,balls<660; wickets<45
+Mohammed Siraj,83,1925,83,88.0,True,True,True,True,True,
+Matthew Forde,21,427,21,21.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Varun Chakravarthy,95,2182,95,138.0,True,True,True,True,True,
+Blessing Muzarabani,37,846,37,47.0,True,True,True,True,True,
+Mitchell Starc,39,866,39,63.0,True,True,True,True,True,
+Karn Sharma,21,372,21,25.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Harshal Patel,79,1748,79,108.0,True,True,True,True,True,
+Zaman Khan,12,243,10,11.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+Mukesh Kumar,59,1227,59,74.0,True,True,True,True,True,
+Washington Sundar,51,806,51,42.0,True,True,False,True,False,wickets<45
+Krunal Pandya,66,1286,66,57.0,True,True,True,True,True,
+William Jacks,35,431,35,24.0,True,False,False,True,False,balls<660; wickets<45
+Bilal Sami,7,148,0,13.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+David Willey,19,396,19,18.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Wayne Parnell,18,418,18,22.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Adam Milne,26,581,26,36.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Joshua Little,36,815,36,47.0,True,True,True,True,True,
+Kagiso Rabada,69,1616,69,87.0,True,True,True,True,True,
+Lizaad Williams,14,280,14,17.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Chamika Karunaratne,20,351,20,13.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Luke Jongwe,18,354,18,19.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Avesh Khan,79,1745,79,91.0,True,True,True,True,True,
+Dwayne Bravo,10,229,10,17.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+Graham Hume,10,200,10,12.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+Mohammad Nabi,44,693,44,31.0,True,True,False,True,False,wickets<45
+Sandeep Sharma,43,1022,43,49.0,True,True,True,True,True,
+Bhuvneshwar Kumar,101,2314,101,122.0,True,True,True,True,True,
+Benjamin Sears,22,463,22,30.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Jacob Duffy,42,933,42,63.0,True,True,True,True,True,
+Patrick Cummins,54,1269,54,63.0,True,True,True,True,True,
+Jason Holder,88,2032,88,118.0,True,True,True,True,True,
+Nathan Ellis,43,959,43,64.0,True,True,True,True,True,
+Sai Kishore,28,501,27,34.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Abbas Afridi,25,474,22,42.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Abhishek Sharma,46,463,43,14.0,True,False,False,True,False,balls<660; wickets<45
+Nathan Smith,6,109,6,6.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+Marcus Stoinis,55,794,55,47.0,True,True,True,True,True,
+Adil Rashid,61,1347,61,74.0,True,True,True,True,True,
+Akeal Hosein,79,1734,79,83.0,True,True,True,True,True,
+Anrich Nortje,39,878,39,39.0,True,True,False,True,False,wickets<45
+Ahmed Daniyal,8,181,2,12.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+Reece Topley,29,639,29,32.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Taskin Ahmed,46,1083,46,70.0,True,True,True,True,True,
+Mitchell Santner,83,1793,83,88.0,True,True,True,True,True,
+Haris Rauf,48,1063,48,80.0,True,True,True,True,True,
+Jaydev Unadkat,30,599,30,33.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Josh Hazlewood,65,1515,65,99.0,True,True,True,True,True,
+Azmatullah Omarzai,65,1118,65,60.0,True,True,True,True,True,
+Shivam Dube,40,491,40,29.0,True,False,False,True,False,balls<660; wickets<45
+Romario Shepherd,92,1657,92,91.0,True,True,True,True,True,
+Abdullah Ahmadzai,12,235,10,17.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+Rashid Khan,122,2780,122,159.0,True,True,True,True,True,
+Prasidh Krishna,52,1234,52,75.0,True,True,True,True,True,
+Akash Deep,14,302,14,11.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Yuzvendra Chahal,98,2218,98,131.0,True,True,True,True,True,
+Mark Adair,40,906,40,60.0,True,True,True,True,True,
+Karim Janat,17,266,12,11.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Abdul Saqlain,8,185,3,10.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+Faheem Ashraf,32,452,32,28.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Naseem Shah,27,608,27,27.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Kuldeep Sen,12,255,12,14.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Pramod Madushan,7,157,5,13.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+Ish Sodhi,59,1206,59,64.0,True,True,True,True,True,
+Saim Ayub,32,523,32,28.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Curtis Campher,29,414,29,12.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Sam Curran,73,1423,73,64.0,True,True,True,True,True,
+Riyan Parag,24,273,24,12.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Ravi Bishnoi,109,2429,109,130.0,True,True,True,True,True,
+Obed McCoy,32,692,32,42.0,False,True,False,True,False,innings<35; wickets<45
+Ravindra Jadeja,74,1423,74,60.0,True,True,True,True,True,
+Tushar Deshpande,50,1121,50,59.0,True,True,True,True,True,
+Hardik Pandya,111,1930,111,90.0,True,True,True,True,True,
+Axar Patel,136,2707,136,129.0,True,True,True,True,True,
+Shahbaz Ahmed,42,554,42,18.0,True,False,False,True,False,balls<660; wickets<45
+Zakary Foulkes,18,401,18,21.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Jamie Overton,30,525,30,39.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Vaibhav Arora,44,964,42,52.0,True,True,True,True,True,
+Shoriful Islam,39,823,39,44.0,True,True,False,True,False,wickets<45
+Sean Abbott,21,476,21,33.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Dwaine Pretorius,14,336,14,18.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Adam Zampa,52,1175,52,73.0,True,True,True,True,True,
+Brydon Carse,13,283,13,20.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Mujeeb Ur Rahman,38,849,38,50.0,True,True,True,True,True,
+Dunith Wellalage,16,339,12,21.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Kumar Kartikeya Singh,16,290,16,12.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Umran Malik,31,600,31,42.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Imad Wasim,14,254,14,15.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Shivam Mavi,12,232,12,12.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Fabian Allen,12,180,12,5.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Sharafuddin Ashraf,11,190,6,10.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+Binura Fernando,16,356,16,15.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Ishant Sharma,24,456,24,26.0,False,False,False,True,False,innings<35; balls<660; wickets<45
+Suyash Sharma,43,927,39,34.0,True,True,False,True,False,wickets<45
+Paul van Meekeren,10,196,10,11.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12
+Qais Ahmad,10,195,3,9.0,False,False,False,False,False,innings<35; balls<660; wickets<45; top_tier_innings<12

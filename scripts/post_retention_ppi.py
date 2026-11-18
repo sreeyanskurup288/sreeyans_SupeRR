@@ -80,6 +80,14 @@ MANUAL_BOWLER_EXCLUSIONS = {
 
 POST_RETENTION_MIN_PRESSURE_BALLS = 5
 POST_RETENTION_MIN_PRESSURE_MATCHES = 1
+BAT_MIN_INNINGS = 40
+BAT_MIN_RUNS = 1200
+BAT_MIN_BALLS = 800
+BAT_MIN_TOP_TIER_INNINGS = 15
+BOWL_MIN_INNINGS = 35
+BOWL_MIN_BALLS = 660
+BOWL_MIN_WICKETS = 45
+BOWL_MIN_TOP_TIER_INNINGS = 12
 
 COUNTRY_BY_PLAYER = {
     "Ibrahim Zadran": "Afghanistan", "Yasir Ali Chowdhury": "Bangladesh", "Towhid Hridoy": "Bangladesh",
@@ -174,10 +182,60 @@ def enforce_country_constraint(df: pd.DataFrame, name_col: str) -> pd.DataFrame:
     return result
 
 
+def build_eligibility(input_dir: Path, bat: pd.DataFrame, bowl: pd.DataFrame, output_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Apply the user-provided batting and bowling minimums separately."""
+    ball = pd.read_csv(input_dir / "ball_by_ball.csv", usecols=[
+        "match_id", "striker_name", "bowler_name", "runs", "is_wicket", "dismissal_type"
+    ])
+    matches = pd.read_csv(input_dir / "matches.csv", usecols=["match_id", "comp_id"])
+    comps = pd.read_csv(input_dir / "competitions.csv", usecols=["comp_id", "comp_name", "match_format"])
+    ctx = matches.merge(comps, on="comp_id", how="left")
+    ball = ball.merge(ctx, on="match_id", how="left")
+    ball["top_tier"] = ball["comp_name"].str.contains("IPL", case=False, na=False) | ball["match_format"].eq("T20I")
+    # Count a dismissal only for the striker dismissed, excluding retired hurt/obstructing field.
+    valid_dismissal = ball["is_wicket"].fillna(False) & ~ball["dismissal_type"].isin(["Run out", "Retired hurt", "Obstructing the field", "Retired out"])
+    bat_i = ball.groupby("striker_name").agg(
+        total_innings=("match_id", "nunique"),
+        total_runs=("runs", "sum"),
+        total_balls=("match_id", "size"),
+        top_tier_innings=("match_id", lambda s: s[ball.loc[s.index, "top_tier"]].nunique()),
+    ).reset_index()
+    bowl_i = ball.groupby("bowler_name").agg(
+        total_innings_bowled=("match_id", "nunique"),
+        total_balls_bowled=("match_id", "size"),
+        top_tier_innings=("match_id", lambda s: s[ball.loc[s.index, "top_tier"]].nunique()),
+    ).reset_index()
+    wickets = ball[valid_dismissal & ball["bowler_name"].notna()].groupby("bowler_name").size().rename("total_wickets")
+    bowl_i = bowl_i.merge(wickets, on="bowler_name", how="left").fillna({"total_wickets": 0})
+    bat_a = bat[["striker_name"]].drop_duplicates().merge(bat_i, on="striker_name", how="left").fillna(0)
+    bowl_a = bowl[["bowler_name"]].drop_duplicates().merge(bowl_i, on="bowler_name", how="left").fillna(0)
+    bat_a["pass_innings"] = bat_a.total_innings >= BAT_MIN_INNINGS
+    bat_a["pass_runs"] = bat_a.total_runs >= BAT_MIN_RUNS
+    bat_a["pass_balls"] = bat_a.total_balls >= BAT_MIN_BALLS
+    bat_a["pass_top_tier"] = bat_a.top_tier_innings >= BAT_MIN_TOP_TIER_INNINGS
+    bat_a["eligible_batting"] = bat_a[["pass_innings", "pass_runs", "pass_balls", "pass_top_tier"]].all(axis=1)
+    bat_a["failed_batting_rules"] = bat_a.apply(lambda r: "; ".join([
+        "innings<40" if not r.pass_innings else "", "runs<1200" if not r.pass_runs else "",
+        "balls<800" if not r.pass_balls else "", "top_tier_innings<15" if not r.pass_top_tier else ""]), axis=1).str.strip("; ").str.replace("; ;", ";", regex=False)
+    bowl_a["pass_innings"] = bowl_a.total_innings_bowled >= BOWL_MIN_INNINGS
+    bowl_a["pass_balls"] = bowl_a.total_balls_bowled >= BOWL_MIN_BALLS
+    bowl_a["pass_wickets"] = bowl_a.total_wickets >= BOWL_MIN_WICKETS
+    bowl_a["pass_top_tier"] = bowl_a.top_tier_innings >= BOWL_MIN_TOP_TIER_INNINGS
+    bowl_a["eligible_bowling"] = bowl_a[["pass_innings", "pass_balls", "pass_wickets", "pass_top_tier"]].all(axis=1)
+    bowl_a["failed_bowling_rules"] = bowl_a.apply(lambda r: "; ".join([
+        "innings<35" if not r.pass_innings else "", "balls<660" if not r.pass_balls else "",
+        "wickets<45" if not r.pass_wickets else "", "top_tier_innings<12" if not r.pass_top_tier else ""]), axis=1).str.strip("; ").str.replace("; ;", ";", regex=False)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    bat_a.to_csv(output_dir / "batting_eligibility_audit.csv", index=False)
+    bowl_a.to_csv(output_dir / "bowling_eligibility_audit.csv", index=False)
+    return bat_a[bat_a.eligible_batting][["striker_name"]], bowl_a[bowl_a.eligible_bowling][["bowler_name"]]
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--ranking-dir", type=Path, required=True)
     parser.add_argument("--metrics-dir", type=Path, default=None)
+    parser.add_argument("--input-dir", type=Path, default=Path("/home/ubuntu/superr_data"))
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
@@ -190,6 +248,9 @@ def main() -> None:
     # only enough to fill the requested top-10 availability lists.
     bat = bat_ranking(bat_source, POST_RETENTION_MIN_PRESSURE_BALLS, POST_RETENTION_MIN_PRESSURE_MATCHES)
     bowl = bowl_ranking(bowl_source, POST_RETENTION_MIN_PRESSURE_BALLS, POST_RETENTION_MIN_PRESSURE_MATCHES)
+    eligible_bat, eligible_bowl = build_eligibility(args.input_dir, bat, bowl, args.output_dir)
+    bat = bat.merge(eligible_bat, on="striker_name", how="inner")
+    bowl = bowl.merge(eligible_bowl, on="bowler_name", how="inner")
     bat_avail, bat_removed = filter_rankings(bat, "striker_name", retention, "batting")
     bowl_avail, bowl_removed = filter_rankings(bowl, "bowler_name", retention, "bowling")
     bat_avail = enforce_country_constraint(bat_avail, "striker_name")
@@ -216,7 +277,8 @@ def main() -> None:
         f"- Retained-player rows transcribed: {len(retention)}",
         f"- Expanded batting candidate pool before filter: {len(bat)}; removed: {len(bat_removed)}; available: {len(bat_avail)}",
         f"- Expanded bowling candidate pool before filter: {len(bowl)}; removed: {len(bowl_removed)}; available: {len(bowl_avail)}",
-        f"- Final output size: top {min(10, len(bat_avail))} batters and top {min(10, len(bowl_avail))} bowlers.",
+        f"- Final output size: {min(10, len(bat_avail))} eligible batters and {min(10, len(bowl_avail))} eligible bowlers. The batting list is not padded when fewer than 10 players satisfy every rule.",
+        "- Eligibility audit files report every individual minimum and failed rule.",
         "",
         "## Outputs",
         "",
