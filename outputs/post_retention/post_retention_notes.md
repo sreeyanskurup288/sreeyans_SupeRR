@@ -6,12 +6,12 @@ The subsequent manual update additionally removes Patrick Cummins and Nitish Red
 Matthew Wade is also excluded because he is unlikely to play in the next IPL cycle.
 Mahendra Singh Dhoni is excluded as a CSK mentor, Rasikh Salam is excluded as retained by Royal Challengers Bengaluru, Namboori Tilak Varma is excluded as retained by Mumbai Indians, and Mitchell Starc is excluded because he opted out.
 
-The same PPI formula is used. Batting eligibility requires at least 25 innings plus a role-based runs minimum: positions 1–5 (top/middle order) require 500 runs, while position 6 or lower (finishers) require 300 runs. Bowling eligibility requires at least 27 innings, 30 wickets, and 12 top-tier innings; the 660-ball overs minimum has been removed. Each panel allows at most one player per non-India country and at most three Indian players; lower-exposure replacements are marked with lower confidence.
+The same PPI formula is used. Batting eligibility requires at least 25 innings plus a role-based runs minimum: positions 1–5 (top/middle order) require 500 runs, while position 6 or lower (finishers) require 300 runs. Bowling eligibility requires at least 27 innings, 30 wickets, and 12 top-tier innings; the 660-ball overs minimum has been removed. The country-diversity constraint has been removed; final panels are ranked purely by PPI after all eligibility and availability filters.
 
 - Retained-player rows transcribed: 186
-- Expanded batting candidate pool before filter: 42; removed: 28; available: 9
+- Expanded batting candidate pool before filter: 42; removed: 28; available: 10
 - Expanded bowling candidate pool before filter: 88; removed: 54; available: 10
-- Final output size: 9 eligible batters and 10 eligible bowlers. The batting list is not padded when fewer than 10 players satisfy every rule.
+- Final output size: 10 eligible batters and 10 eligible bowlers. The batting list is not padded when fewer than 10 players satisfy every rule.
 - Eligibility audit files report every individual minimum and failed rule.
 
 ## Outputs

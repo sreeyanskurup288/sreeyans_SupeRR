@@ -187,6 +187,13 @@ def enforce_country_constraint(df: pd.DataFrame, name_col: str) -> pd.DataFrame:
     return result
 
 
+def top_ppi_without_country_constraint(df: pd.DataFrame) -> pd.DataFrame:
+    """Rank purely by PPI after availability and eligibility filters."""
+    result = df.sort_values("PPI", ascending=False).head(10).copy()
+    result["post_retention_rank"] = range(1, len(result) + 1)
+    return result
+
+
 def build_eligibility(input_dir: Path, bat: pd.DataFrame, bowl: pd.DataFrame, output_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Apply the user-provided batting and bowling minimums separately."""
     ball = pd.read_csv(input_dir / "ball_by_ball.csv", usecols=[
@@ -262,8 +269,10 @@ def main() -> None:
     bowl = bowl.merge(eligible_bowl, on="bowler_name", how="inner")
     bat_avail, bat_removed = filter_rankings(bat, "striker_name", retention, "batting")
     bowl_avail, bowl_removed = filter_rankings(bowl, "bowler_name", retention, "bowling")
-    bat_avail = enforce_country_constraint(bat_avail, "striker_name")
-    bowl_avail = enforce_country_constraint(bowl_avail, "bowler_name")
+    bat_avail["country"] = bat_avail["striker_name"].map(COUNTRY_BY_PLAYER).fillna("Unknown")
+    bowl_avail["country"] = bowl_avail["bowler_name"].map(COUNTRY_BY_PLAYER).fillna("Unknown")
+    bat_avail = top_ppi_without_country_constraint(bat_avail)
+    bowl_avail = top_ppi_without_country_constraint(bowl_avail)
     bat_avail.to_csv(args.output_dir / "post_retention_batting_ppi.csv", index=False)
     bowl_avail.to_csv(args.output_dir / "post_retention_bowling_ppi.csv", index=False)
     bat_avail.head(10).to_csv(args.output_dir / "post_retention_top10_batting_ppi.csv", index=False)
@@ -281,7 +290,7 @@ def main() -> None:
         "Matthew Wade is also excluded because he is unlikely to play in the next IPL cycle.",
         "Mahendra Singh Dhoni is excluded as a CSK mentor, Rasikh Salam is excluded as retained by Royal Challengers Bengaluru, Namboori Tilak Varma is excluded as retained by Mumbai Indians, and Mitchell Starc is excluded because he opted out.",
         "",
-        "The same PPI formula is used. Batting eligibility requires at least 25 innings plus a role-based runs minimum: positions 1–5 (top/middle order) require 500 runs, while position 6 or lower (finishers) require 300 runs. Bowling eligibility requires at least 27 innings, 30 wickets, and 12 top-tier innings; the 660-ball overs minimum has been removed. Each panel allows at most one player per non-India country and at most three Indian players; lower-exposure replacements are marked with lower confidence.",
+        "The same PPI formula is used. Batting eligibility requires at least 25 innings plus a role-based runs minimum: positions 1–5 (top/middle order) require 500 runs, while position 6 or lower (finishers) require 300 runs. Bowling eligibility requires at least 27 innings, 30 wickets, and 12 top-tier innings; the 660-ball overs minimum has been removed. The country-diversity constraint has been removed; final panels are ranked purely by PPI after all eligibility and availability filters.",
         "",
         f"- Retained-player rows transcribed: {len(retention)}",
         f"- Expanded batting candidate pool before filter: {len(bat)}; removed: {len(bat_removed)}; available: {len(bat_avail)}",

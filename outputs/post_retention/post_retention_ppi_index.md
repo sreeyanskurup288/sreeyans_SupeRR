@@ -1,30 +1,22 @@
 # Post-retention PPI index
 
-**Status: Batting minimum innings reduced to 25.**
+**Status: Country constraint removed.**
 
 ## Active filters
 
 ### Batting
 - Minimum 25 innings
-- Positions 1–5 (top/middle order): minimum 500 runs
-- Position 6 or lower (finisher): minimum 300 runs
-
-Each player’s role is assigned from their most frequent recorded batting position. The audit includes `typical_batting_order`, `batting_role`, and `required_runs`.
+- Positions 1–5: minimum 500 runs
+- Position 6 or lower: minimum 300 runs
 
 ### Bowling
 - Minimum 27 bowling innings
 - Minimum 30 wickets
 - Minimum 12 IPL/T20I innings
 
-## Final result
+The one-player-per-country and maximum-three-Indian-player constraints are removed. Final lists are ranked purely by PPI after all statistical, retention, Pakistan-player, role, mentor, and opt-out filters.
 
-- Available batters after all filters: **9**.
-- Available bowlers after all filters: **10**.
-- Tilak Varma is excluded as Mumbai Indians-retained.
-- Mitchell Starc is excluded because he opted out.
-- Country diversity, Pakistan, role, mentor, and all retention rules remain active.
-
-## Available batters
+## Final top 10 batting list
 
 | Rank | Player | Country | PPI |
 |---:|---|---|---:|
@@ -33,12 +25,13 @@ Each player’s role is assigned from their most frequent recorded batting posit
 | 3 | Bhanuka Rajapaksa | Sri Lanka | 69.99 |
 | 4 | Reeza Hendricks | South Africa | 67.95 |
 | 5 | Gareth Delany | Ireland | 64.46 |
-| 6 | Shikhar Dhawan | India | 56.07 |
-| 7 | Ryan Burl | Zimbabwe | 42.68 |
-| 8 | Deepak Hooda | India | 38.03 |
-| 9 | M Shahrukh Khan | India | 21.08 |
+| 6 | Shamim Hossain | Bangladesh | 60.83 |
+| 7 | Jaker Ali Anik | Bangladesh | 59.56 |
+| 8 | Shikhar Dhawan | India | 56.07 |
+| 9 | Mark Adair | Ireland | 51.60 |
+| 10 | Ryan Burl | Zimbabwe | 42.68 |
 
-## Available bowlers
+## Final top 10 bowling list
 
 | Rank | Player | Country | PPI |
 |---:|---|---|---:|
@@ -46,13 +39,13 @@ Each player’s role is assigned from their most frequent recorded batting posit
 | 2 | Mohit Sharma | India | 72.23 |
 | 3 | Naveen ul Haq | Afghanistan | 69.90 |
 | 4 | Dushmantha Chameera | Sri Lanka | 65.58 |
-| 5 | Tim Southee | New Zealand | 60.96 |
-| 6 | Richard Ngarava | Zimbabwe | 57.70 |
-| 7 | Alzarri Joseph | West Indies | 56.40 |
-| 8 | Joshua Little | Ireland | 51.38 |
-| 9 | Avesh Khan | India | 50.59 |
-| 10 | Adil Rashid | England | 42.92 |
+| 5 | Maheesh Theekshana | Sri Lanka | 64.99 |
+| 6 | Mustafizur Rahman | Bangladesh | 64.16 |
+| 7 | Tanzim Sakib | Bangladesh | 61.90 |
+| 8 | Wanindu Hasaranga | Sri Lanka | 61.80 |
+| 9 | FazalHaq Farooqi | Afghanistan | 61.78 |
+| 10 | Tim Southee | New Zealand | 60.96 |
 
-The batting panel has fewer than 10 eligible, available, country-compliant candidates, so it is not padded with ineligible players.
+Both panels now contain exactly 10 players. Country labels are retained for transparency but are not used as a selection constraint.
 
 Full role-level pass/fail details are in `batting_eligibility_audit.csv`; bowling details are in `bowling_eligibility_audit.csv`.
