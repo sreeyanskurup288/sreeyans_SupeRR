@@ -74,6 +74,7 @@ MANUAL_GLOBAL_EXCLUSIONS = {
     "Rasikh Salam": "Retained by Royal Challengers Bengaluru",
     "Namboori Tilak Varma": "Retained by Mumbai Indians",
     "Mitchell Starc": "Opted out of the IPL cycle",
+    "Shikhar Dhawan": "Retired — not an auction candidate",
 }
 
 MANUAL_BOWLER_EXCLUSIONS = {

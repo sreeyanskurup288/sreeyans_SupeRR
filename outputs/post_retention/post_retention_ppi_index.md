@@ -1,6 +1,6 @@
 # Post-retention PPI index
 
-**Status: Country constraint removed.**
+**Status: Shikhar Dhawan removed as retired.**
 
 ## Active filters
 
@@ -14,7 +14,7 @@
 - Minimum 30 wickets
 - Minimum 12 IPL/T20I innings
 
-The one-player-per-country and maximum-three-Indian-player constraints are removed. Final lists are ranked purely by PPI after all statistical, retention, Pakistan-player, role, mentor, and opt-out filters.
+Country diversity is not used as a constraint. Final lists are ranked by PPI after all eligibility, retention, Pakistan-player, role, mentor, retirement, and opt-out filters.
 
 ## Final top 10 batting list
 
@@ -27,9 +27,9 @@ The one-player-per-country and maximum-three-Indian-player constraints are remov
 | 5 | Gareth Delany | Ireland | 64.46 |
 | 6 | Shamim Hossain | Bangladesh | 60.83 |
 | 7 | Jaker Ali Anik | Bangladesh | 59.56 |
-| 8 | Shikhar Dhawan | India | 56.07 |
-| 9 | Mark Adair | Ireland | 51.60 |
-| 10 | Ryan Burl | Zimbabwe | 42.68 |
+| 8 | Mark Adair | Ireland | 51.60 |
+| 9 | Ryan Burl | Zimbabwe | 42.68 |
+| 10 | Deepak Hooda | India | 38.03 |
 
 ## Final top 10 bowling list
 
@@ -46,6 +46,6 @@ The one-player-per-country and maximum-three-Indian-player constraints are remov
 | 9 | FazalHaq Farooqi | Afghanistan | 61.78 |
 | 10 | Tim Southee | New Zealand | 60.96 |
 
-Both panels now contain exactly 10 players. Country labels are retained for transparency but are not used as a selection constraint.
+Shikhar Dhawan is explicitly excluded as retired and is recorded in `removed_retained_ppi_players.csv`.
 
 Full role-level pass/fail details are in `batting_eligibility_audit.csv`; bowling details are in `bowling_eligibility_audit.csv`.
