@@ -4,12 +4,13 @@ This ranking update applies the retention lists supplied in the 10 screenshots o
 
 The subsequent manual update additionally removes Patrick Cummins and Nitish Reddy as SRH-retained, Andre Russell as not playing in the IPL, and the requested bowling/bowling-all-rounder profiles from the batter list: Ish Sodhi, Patrick Cummins, Maheesh Theekshana, Alzarri Joseph, and Chamika Karunaratne.
 Matthew Wade is also excluded because he is unlikely to play in the next IPL cycle.
+Mahendra Singh Dhoni is excluded as a CSK mentor, and Rasikh Salam is excluded as retained by Royal Challengers Bengaluru.
 
-This is a post-retention availability filter, not a recalculation of player performance. The same PPI formula is used. To preserve an exact top-10 output after the availability and role exclusions, the candidate pool uses at least 100 overall balls and at least 12 pressure balls across at least 2 pressure matches; lower-exposure replacements are marked with lower confidence.
+The same PPI formula is used. To preserve an exact top-10 output after all exclusions, the candidate pool uses at least 100 overall balls and at least 5 pressure balls across at least 1 pressure match. Each panel allows at most one player per non-India country and at most three Indian players; lower-exposure replacements are marked with lower confidence.
 
 - Retained-player rows transcribed: 186
-- Expanded batting candidate pool before filter: 46; removed: 31; available: 15
-- Expanded bowling candidate pool before filter: 84; removed: 47; available: 37
+- Expanded batting candidate pool before filter: 83; removed: 47; available: 10
+- Expanded bowling candidate pool before filter: 160; removed: 71; available: 10
 - Final output size: top 10 batters and top 10 bowlers.
 
 ## Outputs

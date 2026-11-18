@@ -70,14 +70,44 @@ MANUAL_BATTER_EXCLUSIONS = {
 MANUAL_GLOBAL_EXCLUSIONS = {
     "Andre Russell": "Not playing in the IPL",
     "Matthew Wade": "Unlikely to play in the next IPL cycle",
+    "Mahendra Singh Dhoni": "CSK mentor — not a playing auction candidate",
+    "Rasikh Salam": "Retained by Royal Challengers Bengaluru",
 }
 
 MANUAL_BOWLER_EXCLUSIONS = {
     "Nitish Reddy": "Retained by Sunrisers Hyderabad",
 }
 
-POST_RETENTION_MIN_PRESSURE_BALLS = 12
-POST_RETENTION_MIN_PRESSURE_MATCHES = 2
+POST_RETENTION_MIN_PRESSURE_BALLS = 5
+POST_RETENTION_MIN_PRESSURE_MATCHES = 1
+
+COUNTRY_BY_PLAYER = {
+    "Ibrahim Zadran": "Afghanistan", "Yasir Ali Chowdhury": "Bangladesh", "Towhid Hridoy": "Bangladesh",
+    "Sahan Arachchige": "Sri Lanka", "Bhanuka Rajapaksa": "Sri Lanka", "Rahul Chopra": "Hong Kong",
+    "Reeza Hendricks": "South Africa", "Luke Jongwe": "Zimbabwe", "Mahedi Hasan": "Bangladesh",
+    "Gareth Delany": "Ireland", "Wellington Masakadza": "Zimbabwe", "Shamim Hossain": "Bangladesh",
+    "Jaker Ali Anik": "Bangladesh", "Clive Madande": "Zimbabwe", "Shikhar Dhawan": "India",
+    "Barry McCarthy": "Ireland", "Tanzim Sakib": "Bangladesh", "Mohammad Rishad Hossain": "Bangladesh",
+    "Mark Adair": "Ireland", "Dunith Wellalage": "Sri Lanka", "Gudakesh Motie": "West Indies",
+    "Ryan Burl": "Zimbabwe", "Dushmantha Chameera": "Sri Lanka", "Chris Jordan": "England",
+    "Deepak Hooda": "India", "Brad Evans": "Zimbabwe", "Mehidy Hasan Miraz": "Bangladesh",
+    "Adil Rashid": "England", "Namboori Tilak Varma": "India", "Wanindu Hasaranga": "Sri Lanka",
+    "Lalit Yadav": "India", "Mohammad Mahmudullah": "Bangladesh", "George Dockrell": "Ireland",
+    "M Shahrukh Khan": "India", "Kieron Pollard": "West Indies", "Abbas Afridi": "Pakistan",
+    "Spencer Johnson": "Australia", "Akash Madhwal": "India", "Kane Richardson": "Australia",
+    "Mohit Sharma": "India", "Jediah Blades": "West Indies", "Naveen ul Haq": "Afghanistan",
+    "Pieter Willem Mulder": "South Africa", "Allah Ghazanfar": "Afghanistan", "Ripon Mondol": "Bangladesh",
+    "Maheesh Theekshana": "Sri Lanka", "Mustafizur Rahman": "Bangladesh", "Shamar Joseph": "West Indies",
+    "Tendai Chatara": "Zimbabwe", "Liam Dawson": "England", "Yash Punja": "India",
+    "FazalHaq Farooqi": "Afghanistan", "Tim Southee": "New Zealand", "Mark Wood": "England",
+    "Richard Ngarava": "Zimbabwe", "Salman Mirza": "Pakistan", "Matheesha Pathirana": "Sri Lanka",
+    "Mohammad Wasim": "Pakistan", "Lockie Ferguson": "New Zealand", "Trent Boult": "New Zealand",
+    "Alzarri Joseph": "West Indies", "Matthew Forde": "West Indies", "Blessing Muzarabani": "Zimbabwe",
+    "Mitchell Starc": "Australia", "Karn Sharma": "India", "Zaman Khan": "Pakistan",
+    "William Jacks": "England", "Bilal Sami": "United Arab Emirates", "David Willey": "England",
+    "Wayne Parnell": "South Africa", "Adam Milne": "New Zealand", "Joshua Little": "Ireland",
+    "Lizaad Williams": "South Africa", "Chamika Karunaratne": "Sri Lanka", "Avesh Khan": "India",
+}
 
 
 def norm(name: str) -> str:
@@ -118,6 +148,32 @@ def filter_rankings(df: pd.DataFrame, name_col: str, retention: pd.DataFrame, ca
     return available, removed
 
 
+def enforce_country_constraint(df: pd.DataFrame, name_col: str) -> pd.DataFrame:
+    """Keep one player per non-India country and at most three Indian players."""
+    x = df.copy()
+    x["country"] = x[name_col].map(COUNTRY_BY_PLAYER).fillna("Unknown")
+    selected = []
+    used = set()
+    india_count = 0
+    for _, row in x.sort_values("PPI", ascending=False).iterrows():
+        country = row["country"]
+        if country == "Unknown":
+            continue
+        if country == "India":
+            if india_count >= 3:
+                continue
+            india_count += 1
+        elif country in used:
+            continue
+        used.add(country)
+        selected.append(row)
+        if len(selected) == 10:
+            break
+    result = pd.DataFrame(selected)
+    result["post_retention_rank"] = range(1, len(result) + 1)
+    return result
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--ranking-dir", type=Path, required=True)
@@ -136,6 +192,8 @@ def main() -> None:
     bowl = bowl_ranking(bowl_source, POST_RETENTION_MIN_PRESSURE_BALLS, POST_RETENTION_MIN_PRESSURE_MATCHES)
     bat_avail, bat_removed = filter_rankings(bat, "striker_name", retention, "batting")
     bowl_avail, bowl_removed = filter_rankings(bowl, "bowler_name", retention, "bowling")
+    bat_avail = enforce_country_constraint(bat_avail, "striker_name")
+    bowl_avail = enforce_country_constraint(bowl_avail, "bowler_name")
     bat_avail.to_csv(args.output_dir / "post_retention_batting_ppi.csv", index=False)
     bowl_avail.to_csv(args.output_dir / "post_retention_bowling_ppi.csv", index=False)
     bat_avail.head(10).to_csv(args.output_dir / "post_retention_top10_batting_ppi.csv", index=False)
@@ -151,8 +209,9 @@ def main() -> None:
         "",
         "The subsequent manual update additionally removes Patrick Cummins and Nitish Reddy as SRH-retained, Andre Russell as not playing in the IPL, and the requested bowling/bowling-all-rounder profiles from the batter list: Ish Sodhi, Patrick Cummins, Maheesh Theekshana, Alzarri Joseph, and Chamika Karunaratne.",
         "Matthew Wade is also excluded because he is unlikely to play in the next IPL cycle.",
+        "Mahendra Singh Dhoni is excluded as a CSK mentor, and Rasikh Salam is excluded as retained by Royal Challengers Bengaluru.",
         "",
-        f"This is a post-retention availability filter, not a recalculation of player performance. The same PPI formula is used. To preserve an exact top-10 output after the availability and role exclusions, the candidate pool uses at least 100 overall balls and at least {POST_RETENTION_MIN_PRESSURE_BALLS} pressure balls across at least {POST_RETENTION_MIN_PRESSURE_MATCHES} pressure matches; lower-exposure replacements are marked with lower confidence.",
+        f"The same PPI formula is used. To preserve an exact top-10 output after all exclusions, the candidate pool uses at least 100 overall balls and at least {POST_RETENTION_MIN_PRESSURE_BALLS} pressure balls across at least {POST_RETENTION_MIN_PRESSURE_MATCHES} pressure match. Each panel allows at most one player per non-India country and at most three Indian players; lower-exposure replacements are marked with lower confidence.",
         "",
         f"- Retained-player rows transcribed: {len(retention)}",
         f"- Expanded batting candidate pool before filter: {len(bat)}; removed: {len(bat_removed)}; available: {len(bat_avail)}",
