@@ -72,6 +72,8 @@ MANUAL_GLOBAL_EXCLUSIONS = {
     "Matthew Wade": "Unlikely to play in the next IPL cycle",
     "Mahendra Singh Dhoni": "CSK mentor — not a playing auction candidate",
     "Rasikh Salam": "Retained by Royal Challengers Bengaluru",
+    "Namboori Tilak Varma": "Retained by Mumbai Indians",
+    "Mitchell Starc": "Opted out of the IPL cycle",
 }
 
 MANUAL_BOWLER_EXCLUSIONS = {
@@ -82,10 +84,11 @@ POST_RETENTION_MIN_PRESSURE_BALLS = 5
 POST_RETENTION_MIN_PRESSURE_MATCHES = 1
 BAT_MIN_INNINGS = 40
 BAT_MIN_RUNS = 1200
-BAT_MIN_BALLS = 800
-BAT_MIN_TOP_TIER_INNINGS = 15
+BAT_MIN_BALLS = 0
+BAT_MIN_STRIKE_RATE = 0
+BAT_MIN_TOP_TIER_INNINGS = 0
 BOWL_MIN_INNINGS = 35
-BOWL_MIN_BALLS = 660
+BOWL_MIN_BALLS = 0
 BOWL_MIN_WICKETS = 45
 BOWL_MIN_TOP_TIER_INNINGS = 12
 
@@ -101,7 +104,7 @@ COUNTRY_BY_PLAYER = {
     "Deepak Hooda": "India", "Brad Evans": "Zimbabwe", "Mehidy Hasan Miraz": "Bangladesh",
     "Adil Rashid": "England", "Namboori Tilak Varma": "India", "Wanindu Hasaranga": "Sri Lanka",
     "Lalit Yadav": "India", "Mohammad Mahmudullah": "Bangladesh", "George Dockrell": "Ireland",
-    "M Shahrukh Khan": "India", "Kieron Pollard": "West Indies", "Abbas Afridi": "Pakistan",
+    "M Shahrukh Khan": "India", "Kieron Pollard": "West Indies", "Abbas Afridi": "Pakistan", "Tim David": "Australia",
     "Spencer Johnson": "Australia", "Akash Madhwal": "India", "Kane Richardson": "Australia",
     "Mohit Sharma": "India", "Jediah Blades": "West Indies", "Naveen ul Haq": "Afghanistan",
     "Pieter Willem Mulder": "South Africa", "Allah Ghazanfar": "Afghanistan", "Ripon Mondol": "Bangladesh",
@@ -211,17 +214,18 @@ def build_eligibility(input_dir: Path, bat: pd.DataFrame, bowl: pd.DataFrame, ou
     bowl_a = bowl[["bowler_name"]].drop_duplicates().merge(bowl_i, on="bowler_name", how="left").fillna(0)
     bat_a["pass_innings"] = bat_a.total_innings >= BAT_MIN_INNINGS
     bat_a["pass_runs"] = bat_a.total_runs >= BAT_MIN_RUNS
-    bat_a["pass_balls"] = bat_a.total_balls >= BAT_MIN_BALLS
+    bat_a["strike_rate"] = bat_a.total_runs.div(bat_a.total_balls.replace(0, pd.NA)).mul(100).fillna(0)
+    bat_a["pass_strike_rate"] = bat_a.strike_rate >= BAT_MIN_STRIKE_RATE
     bat_a["pass_top_tier"] = bat_a.top_tier_innings >= BAT_MIN_TOP_TIER_INNINGS
-    bat_a["eligible_batting"] = bat_a[["pass_innings", "pass_runs", "pass_balls", "pass_top_tier"]].all(axis=1)
+    bat_a["eligible_batting"] = bat_a[["pass_innings", "pass_runs"]].all(axis=1)
     bat_a["failed_batting_rules"] = bat_a.apply(lambda r: "; ".join([
         "innings<40" if not r.pass_innings else "", "runs<1200" if not r.pass_runs else "",
-        "balls<800" if not r.pass_balls else "", "top_tier_innings<15" if not r.pass_top_tier else ""]), axis=1).str.strip("; ").str.replace("; ;", ";", regex=False)
+        "top_tier_innings<15" if not r.pass_top_tier else ""]), axis=1).str.strip("; ").str.replace("; ;", ";", regex=False)
     bowl_a["pass_innings"] = bowl_a.total_innings_bowled >= BOWL_MIN_INNINGS
     bowl_a["pass_balls"] = bowl_a.total_balls_bowled >= BOWL_MIN_BALLS
     bowl_a["pass_wickets"] = bowl_a.total_wickets >= BOWL_MIN_WICKETS
     bowl_a["pass_top_tier"] = bowl_a.top_tier_innings >= BOWL_MIN_TOP_TIER_INNINGS
-    bowl_a["eligible_bowling"] = bowl_a[["pass_innings", "pass_balls", "pass_wickets", "pass_top_tier"]].all(axis=1)
+    bowl_a["eligible_bowling"] = bowl_a[["pass_innings", "pass_wickets", "pass_top_tier"]].all(axis=1)
     bowl_a["failed_bowling_rules"] = bowl_a.apply(lambda r: "; ".join([
         "innings<35" if not r.pass_innings else "", "balls<660" if not r.pass_balls else "",
         "wickets<45" if not r.pass_wickets else "", "top_tier_innings<12" if not r.pass_top_tier else ""]), axis=1).str.strip("; ").str.replace("; ;", ";", regex=False)
@@ -270,9 +274,9 @@ def main() -> None:
         "",
         "The subsequent manual update additionally removes Patrick Cummins and Nitish Reddy as SRH-retained, Andre Russell as not playing in the IPL, and the requested bowling/bowling-all-rounder profiles from the batter list: Ish Sodhi, Patrick Cummins, Maheesh Theekshana, Alzarri Joseph, and Chamika Karunaratne.",
         "Matthew Wade is also excluded because he is unlikely to play in the next IPL cycle.",
-        "Mahendra Singh Dhoni is excluded as a CSK mentor, and Rasikh Salam is excluded as retained by Royal Challengers Bengaluru.",
+        "Mahendra Singh Dhoni is excluded as a CSK mentor, Rasikh Salam is excluded as retained by Royal Challengers Bengaluru, Namboori Tilak Varma is excluded as retained by Mumbai Indians, and Mitchell Starc is excluded because he opted out.",
         "",
-        f"The same PPI formula is used. To preserve an exact top-10 output after all exclusions, the candidate pool uses at least 100 overall balls and at least {POST_RETENTION_MIN_PRESSURE_BALLS} pressure balls across at least {POST_RETENTION_MIN_PRESSURE_MATCHES} pressure match. Each panel allows at most one player per non-India country and at most three Indian players; lower-exposure replacements are marked with lower confidence.",
+        "The same PPI formula is used. Batting eligibility requires exactly two filters: at least 40 innings and 1,200 runs. Bowling eligibility requires at least 35 innings, 45 wickets, and 12 top-tier innings; the 660-ball overs minimum has been removed. Each panel allows at most one player per non-India country and at most three Indian players; lower-exposure replacements are marked with lower confidence.",
         "",
         f"- Retained-player rows transcribed: {len(retention)}",
         f"- Expanded batting candidate pool before filter: {len(bat)}; removed: {len(bat_removed)}; available: {len(bat_avail)}",

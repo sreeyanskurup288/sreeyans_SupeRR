@@ -1,83 +1,83 @@
-striker_name,total_innings,total_runs,total_balls,top_tier_innings,pass_innings,pass_runs,pass_balls,pass_top_tier,eligible_batting,failed_batting_rules
-Abdul Samad,50,762,546,46,True,False,False,True,False,runs<1200; balls<800
-Corbin Bosch,15,171,144,15,False,False,False,True,False,innings<40; runs<1200; balls<800
-Rovman Powell,100,2288,1651,100,True,True,True,True,True,
-Matthew Wade,30,592,446,30,False,False,False,True,False,innings<40; runs<1200; balls<800
-Ibrahim Zadran,47,1319,1164,47,True,True,True,True,True,
-Mahendra Singh Dhoni,48,693,497,48,True,False,False,True,False,runs<1200; balls<800
-Yasir Ali Chowdhury,12,212,163,9,False,False,False,False,False,innings<40; runs<1200; balls<800; top_tier_innings<15
-Shashank Singh,42,905,588,42,True,False,False,True,False,runs<1200; balls<800
-Jason Holder,59,636,465,59,True,False,False,True,False,runs<1200; balls<800
-Akeal Hosein,32,286,230,32,False,False,False,True,False,innings<40; runs<1200; balls<800
-Rashid Khan,71,791,540,71,True,False,False,True,False,runs<1200; balls<800
-Towhid Hridoy,53,1256,1029,50,True,True,True,True,True,
-Ramandeep Singh,33,442,298,27,False,False,False,True,False,innings<40; runs<1200; balls<800
-Sahan Arachchige,11,236,194,2,False,False,False,False,False,innings<40; runs<1200; balls<800; top_tier_innings<15
-Bhanuka Rajapaksa,31,576,438,31,False,False,False,True,False,innings<40; runs<1200; balls<800
-Rahul Chopra,14,236,231,11,False,False,False,False,False,innings<40; runs<1200; balls<800; top_tier_innings<15
-Reeza Hendricks,34,1224,860,34,False,True,True,True,False,innings<40
-Rahul Tewatia,57,781,562,57,True,False,False,True,False,runs<1200; balls<800
-Luke Jongwe,17,156,128,17,False,False,False,True,False,innings<40; runs<1200; balls<800
-Mahedi Hasan,25,265,264,25,False,False,False,True,False,innings<40; runs<1200; balls<800
-Patrick Cummins,35,389,253,35,False,False,False,True,False,innings<40; runs<1200; balls<800
-Gareth Delany,31,382,298,31,False,False,False,True,False,innings<40; runs<1200; balls<800
-Haris Rauf,23,124,110,23,False,False,False,True,False,innings<40; runs<1200; balls<800
-Wellington Masakadza,21,166,157,21,False,False,False,True,False,innings<40; runs<1200; balls<800
-Dhruv Jurel,54,1207,824,54,True,True,True,True,True,
-Noor Ahmad,26,92,115,26,False,False,False,True,False,innings<40; runs<1200; balls<800
-Shamim Hossain,37,558,457,34,False,False,False,True,False,innings<40; runs<1200; balls<800
-Dasun Shanaka,61,1080,806,61,True,False,True,True,False,runs<1200
-Jaker Ali Anik,34,666,532,34,False,False,False,True,False,innings<40; runs<1200; balls<800
-Rinku Singh,83,1962,1351,83,True,True,True,True,True,
-Clive Madande,23,304,307,23,False,False,False,True,False,innings<40; runs<1200; balls<800
-Riyan Parag,69,1646,1133,69,True,True,True,True,True,
-Shikhar Dhawan,30,985,795,30,False,False,False,True,False,innings<40; runs<1200; balls<800
-Barry McCarthy,15,137,116,15,False,False,False,True,False,innings<40; runs<1200; balls<800
-Ish Sodhi,27,149,137,27,False,False,False,True,False,innings<40; runs<1200; balls<800
-Washington Sundar,48,891,671,48,True,False,False,True,False,runs<1200; balls<800
-Tanzim Sakib,17,183,166,17,False,False,False,True,False,innings<40; runs<1200; balls<800
-Azmatullah Omarzai,53,913,688,53,True,False,False,True,False,runs<1200; balls<800
-Mohammad Rishad Hossain,29,189,177,29,False,False,False,True,False,innings<40; runs<1200; balls<800
-Kuldeep Yadav,37,157,210,37,False,False,False,True,False,innings<40; runs<1200; balls<800
-Andre Russell,57,1254,785,57,True,True,False,True,False,balls<800
-Mark Adair,27,387,284,27,False,False,False,True,False,innings<40; runs<1200; balls<800
-Bhuvneshwar Kumar,33,149,177,33,False,False,False,True,False,innings<40; runs<1200; balls<800
-Dunith Wellalage,10,161,142,7,False,False,False,False,False,innings<40; runs<1200; balls<800; top_tier_innings<15
-Mitchell Santner,57,681,560,57,True,False,False,True,False,runs<1200; balls<800
-Gudakesh Motie,21,201,154,21,False,False,False,True,False,innings<40; runs<1200; balls<800
-Shaheen Afridi,26,225,193,26,False,False,False,True,False,innings<40; runs<1200; balls<800
-Shahbaz Ahmed,32,543,460,32,False,False,False,True,False,innings<40; runs<1200; balls<800
-Faheem Ashraf,27,295,210,27,False,False,False,True,False,innings<40; runs<1200; balls<800
-Shivam Dube,98,2380,1638,98,True,True,True,True,True,
-Sam Curran,59,1122,894,59,True,False,True,True,False,runs<1200
-Kagiso Rabada,25,168,153,25,False,False,False,True,False,innings<40; runs<1200; balls<800
-Ryan Burl,42,853,734,42,True,False,False,True,False,runs<1200; balls<800
-Dushmantha Chameera,29,92,105,29,False,False,False,True,False,innings<40; runs<1200; balls<800
-Chamika Karunaratne,17,155,154,17,False,False,False,True,False,innings<40; runs<1200; balls<800
-Shadab Khan,29,474,347,29,False,False,False,True,False,innings<40; runs<1200; balls<800
-Chris Jordan,19,158,134,19,False,False,False,True,False,innings<40; runs<1200; balls<800
-Maheesh Theekshana,37,128,205,37,False,False,False,True,False,innings<40; runs<1200; balls<800
-Axar Patel,105,1761,1347,105,True,True,True,True,True,
-Jamie Overton,18,207,153,18,False,False,False,True,False,innings<40; runs<1200; balls<800
-Deepak Hooda,55,1058,826,55,True,False,True,True,False,runs<1200
-Brad Evans,17,145,128,17,False,False,False,True,False,innings<40; runs<1200; balls<800
-Mohammad Nawaz,46,705,523,46,True,False,False,True,False,runs<1200; balls<800
-Harpreet Brar,21,165,142,21,False,False,False,True,False,innings<40; runs<1200; balls<800
-Alzarri Joseph,20,124,135,20,False,False,False,True,False,innings<40; runs<1200; balls<800
-Shardul Thakur,30,296,228,30,False,False,False,True,False,innings<40; runs<1200; balls<800
-Mehidy Hasan Miraz,17,313,273,17,False,False,False,True,False,innings<40; runs<1200; balls<800
-Adil Rashid,21,122,126,21,False,False,False,True,False,innings<40; runs<1200; balls<800
-Namboori Tilak Varma,127,3596,2631,123,True,True,True,True,True,
-Wanindu Hasaranga,62,584,482,62,True,False,False,True,False,runs<1200; balls<800
-Arshdeep Singh,39,129,141,39,False,False,False,True,False,innings<40; runs<1200; balls<800
-Ravi Bishnoi,28,102,108,28,False,False,False,True,False,innings<40; runs<1200; balls<800
-Lalit Yadav,16,237,226,16,False,False,False,True,False,innings<40; runs<1200; balls<800
-Mohammad Mahmudullah,14,313,275,14,False,False,False,False,False,innings<40; runs<1200; balls<800; top_tier_innings<15
-Tim David,98,2178,1293,98,True,True,True,True,True,
-George Dockrell,42,678,519,42,True,False,False,True,False,runs<1200; balls<800
-M Shahrukh Khan,43,622,433,43,True,False,False,True,False,runs<1200; balls<800
-Harshit Rana,18,160,154,18,False,False,False,True,False,innings<40; runs<1200; balls<800
-Abbas Afridi,16,144,119,14,False,False,False,False,False,innings<40; runs<1200; balls<800; top_tier_innings<15
-Romario Shepherd,68,1059,727,68,True,False,False,True,False,runs<1200; balls<800
-Jofra Archer,29,187,151,29,False,False,False,True,False,innings<40; runs<1200; balls<800
-Kieron Pollard,18,245,230,18,False,False,False,True,False,innings<40; runs<1200; balls<800
+striker_name,total_innings,total_runs,total_balls,top_tier_innings,pass_innings,pass_runs,strike_rate,pass_strike_rate,pass_top_tier,eligible_batting,failed_batting_rules
+Abdul Samad,50,762,546,46,True,False,139.56043956043956,True,True,False,runs<1200
+Corbin Bosch,15,171,144,15,False,False,118.75,True,True,False,innings<40; runs<1200
+Rovman Powell,100,2288,1651,100,True,True,138.58267716535434,True,True,True,
+Matthew Wade,30,592,446,30,False,False,132.7354260089686,True,True,False,innings<40; runs<1200
+Ibrahim Zadran,47,1319,1164,47,True,True,113.31615120274914,True,True,True,
+Mahendra Singh Dhoni,48,693,497,48,True,False,139.43661971830986,True,True,False,runs<1200
+Yasir Ali Chowdhury,12,212,163,9,False,False,130.06134969325154,True,True,False,innings<40; runs<1200
+Shashank Singh,42,905,588,42,True,False,153.91156462585033,True,True,False,runs<1200
+Jason Holder,59,636,465,59,True,False,136.7741935483871,True,True,False,runs<1200
+Akeal Hosein,32,286,230,32,False,False,124.34782608695652,True,True,False,innings<40; runs<1200
+Rashid Khan,71,791,540,71,True,False,146.48148148148147,True,True,False,runs<1200
+Towhid Hridoy,53,1256,1029,50,True,True,122.06025267249755,True,True,True,
+Ramandeep Singh,33,442,298,27,False,False,148.3221476510067,True,True,False,innings<40; runs<1200
+Sahan Arachchige,11,236,194,2,False,False,121.64948453608247,True,True,False,innings<40; runs<1200
+Bhanuka Rajapaksa,31,576,438,31,False,False,131.50684931506848,True,True,False,innings<40; runs<1200
+Rahul Chopra,14,236,231,11,False,False,102.16450216450217,True,True,False,innings<40; runs<1200
+Reeza Hendricks,34,1224,860,34,False,True,142.32558139534882,True,True,False,innings<40
+Rahul Tewatia,57,781,562,57,True,False,138.96797153024912,True,True,False,runs<1200
+Luke Jongwe,17,156,128,17,False,False,121.875,True,True,False,innings<40; runs<1200
+Mahedi Hasan,25,265,264,25,False,False,100.37878787878789,True,True,False,innings<40; runs<1200
+Patrick Cummins,35,389,253,35,False,False,153.75494071146244,True,True,False,innings<40; runs<1200
+Gareth Delany,31,382,298,31,False,False,128.18791946308724,True,True,False,innings<40; runs<1200
+Haris Rauf,23,124,110,23,False,False,112.72727272727272,True,True,False,innings<40; runs<1200
+Wellington Masakadza,21,166,157,21,False,False,105.73248407643312,True,True,False,innings<40; runs<1200
+Dhruv Jurel,54,1207,824,54,True,True,146.48058252427185,True,True,True,
+Noor Ahmad,26,92,115,26,False,False,80.0,True,True,False,innings<40; runs<1200
+Shamim Hossain,37,558,457,34,False,False,122.10065645514223,True,True,False,innings<40; runs<1200
+Dasun Shanaka,61,1080,806,61,True,False,133.99503722084367,True,True,False,runs<1200
+Jaker Ali Anik,34,666,532,34,False,False,125.18796992481202,True,True,False,innings<40; runs<1200
+Rinku Singh,83,1962,1351,83,True,True,145.22575869726128,True,True,True,
+Clive Madande,23,304,307,23,False,False,99.0228013029316,True,True,False,innings<40; runs<1200
+Riyan Parag,69,1646,1133,69,True,True,145.27802294792588,True,True,True,
+Shikhar Dhawan,30,985,795,30,False,False,123.89937106918238,True,True,False,innings<40; runs<1200
+Barry McCarthy,15,137,116,15,False,False,118.10344827586208,True,True,False,innings<40; runs<1200
+Ish Sodhi,27,149,137,27,False,False,108.75912408759123,True,True,False,innings<40; runs<1200
+Washington Sundar,48,891,671,48,True,False,132.78688524590163,True,True,False,runs<1200
+Tanzim Sakib,17,183,166,17,False,False,110.24096385542168,True,True,False,innings<40; runs<1200
+Azmatullah Omarzai,53,913,688,53,True,False,132.70348837209303,True,True,False,runs<1200
+Mohammad Rishad Hossain,29,189,177,29,False,False,106.77966101694916,True,True,False,innings<40; runs<1200
+Kuldeep Yadav,37,157,210,37,False,False,74.76190476190476,True,True,False,innings<40; runs<1200
+Andre Russell,57,1254,785,57,True,True,159.74522292993632,True,True,True,
+Mark Adair,27,387,284,27,False,False,136.26760563380282,True,True,False,innings<40; runs<1200
+Bhuvneshwar Kumar,33,149,177,33,False,False,84.18079096045197,True,True,False,innings<40; runs<1200
+Dunith Wellalage,10,161,142,7,False,False,113.38028169014085,True,True,False,innings<40; runs<1200
+Mitchell Santner,57,681,560,57,True,False,121.60714285714285,True,True,False,runs<1200
+Gudakesh Motie,21,201,154,21,False,False,130.5194805194805,True,True,False,innings<40; runs<1200
+Shaheen Afridi,26,225,193,26,False,False,116.580310880829,True,True,False,innings<40; runs<1200
+Shahbaz Ahmed,32,543,460,32,False,False,118.04347826086956,True,True,False,innings<40; runs<1200
+Faheem Ashraf,27,295,210,27,False,False,140.47619047619045,True,True,False,innings<40; runs<1200
+Shivam Dube,98,2380,1638,98,True,True,145.2991452991453,True,True,True,
+Sam Curran,59,1122,894,59,True,False,125.503355704698,True,True,False,runs<1200
+Kagiso Rabada,25,168,153,25,False,False,109.80392156862746,True,True,False,innings<40; runs<1200
+Ryan Burl,42,853,734,42,True,False,116.2125340599455,True,True,False,runs<1200
+Dushmantha Chameera,29,92,105,29,False,False,87.61904761904762,True,True,False,innings<40; runs<1200
+Chamika Karunaratne,17,155,154,17,False,False,100.64935064935065,True,True,False,innings<40; runs<1200
+Shadab Khan,29,474,347,29,False,False,136.59942363112393,True,True,False,innings<40; runs<1200
+Chris Jordan,19,158,134,19,False,False,117.91044776119404,True,True,False,innings<40; runs<1200
+Maheesh Theekshana,37,128,205,37,False,False,62.4390243902439,True,True,False,innings<40; runs<1200
+Axar Patel,105,1761,1347,105,True,True,130.73496659242764,True,True,True,
+Jamie Overton,18,207,153,18,False,False,135.29411764705884,True,True,False,innings<40; runs<1200
+Deepak Hooda,55,1058,826,55,True,False,128.08716707021793,True,True,False,runs<1200
+Brad Evans,17,145,128,17,False,False,113.28125,True,True,False,innings<40; runs<1200
+Mohammad Nawaz,46,705,523,46,True,False,134.79923518164435,True,True,False,runs<1200
+Harpreet Brar,21,165,142,21,False,False,116.19718309859155,True,True,False,innings<40; runs<1200
+Alzarri Joseph,20,124,135,20,False,False,91.85185185185185,True,True,False,innings<40; runs<1200
+Shardul Thakur,30,296,228,30,False,False,129.82456140350877,True,True,False,innings<40; runs<1200
+Mehidy Hasan Miraz,17,313,273,17,False,False,114.65201465201464,True,True,False,innings<40; runs<1200
+Adil Rashid,21,122,126,21,False,False,96.82539682539682,True,True,False,innings<40; runs<1200
+Namboori Tilak Varma,127,3596,2631,123,True,True,136.67806917521855,True,True,True,
+Wanindu Hasaranga,62,584,482,62,True,False,121.16182572614107,True,True,False,runs<1200
+Arshdeep Singh,39,129,141,39,False,False,91.48936170212765,True,True,False,innings<40; runs<1200
+Ravi Bishnoi,28,102,108,28,False,False,94.44444444444444,True,True,False,innings<40; runs<1200
+Lalit Yadav,16,237,226,16,False,False,104.86725663716814,True,True,False,innings<40; runs<1200
+Mohammad Mahmudullah,14,313,275,14,False,False,113.81818181818181,True,True,False,innings<40; runs<1200
+Tim David,98,2178,1293,98,True,True,168.44547563805102,True,True,True,
+George Dockrell,42,678,519,42,True,False,130.635838150289,True,True,False,runs<1200
+M Shahrukh Khan,43,622,433,43,True,False,143.64896073903003,True,True,False,runs<1200
+Harshit Rana,18,160,154,18,False,False,103.89610389610388,True,True,False,innings<40; runs<1200
+Abbas Afridi,16,144,119,14,False,False,121.00840336134453,True,True,False,innings<40; runs<1200
+Romario Shepherd,68,1059,727,68,True,False,145.66712517193946,True,True,False,runs<1200
+Jofra Archer,29,187,151,29,False,False,123.84105960264901,True,True,False,innings<40; runs<1200
+Kieron Pollard,18,245,230,18,False,False,106.5217391304348,True,True,False,innings<40; runs<1200

@@ -4,14 +4,14 @@ This ranking update applies the retention lists supplied in the 10 screenshots o
 
 The subsequent manual update additionally removes Patrick Cummins and Nitish Reddy as SRH-retained, Andre Russell as not playing in the IPL, and the requested bowling/bowling-all-rounder profiles from the batter list: Ish Sodhi, Patrick Cummins, Maheesh Theekshana, Alzarri Joseph, and Chamika Karunaratne.
 Matthew Wade is also excluded because he is unlikely to play in the next IPL cycle.
-Mahendra Singh Dhoni is excluded as a CSK mentor, and Rasikh Salam is excluded as retained by Royal Challengers Bengaluru.
+Mahendra Singh Dhoni is excluded as a CSK mentor, Rasikh Salam is excluded as retained by Royal Challengers Bengaluru, Namboori Tilak Varma is excluded as retained by Mumbai Indians, and Mitchell Starc is excluded because he opted out.
 
-The same PPI formula is used. To preserve an exact top-10 output after all exclusions, the candidate pool uses at least 100 overall balls and at least 5 pressure balls across at least 1 pressure match. Each panel allows at most one player per non-India country and at most three Indian players; lower-exposure replacements are marked with lower confidence.
+The same PPI formula is used. Batting eligibility requires exactly two filters: at least 40 innings and 1,200 runs. Bowling eligibility requires at least 35 innings, 45 wickets, and 12 top-tier innings; the 660-ball overs minimum has been removed. Each panel allows at most one player per non-India country and at most three Indian players; lower-exposure replacements are marked with lower confidence.
 
 - Retained-player rows transcribed: 186
-- Expanded batting candidate pool before filter: 10; removed: 7; available: 3
-- Expanded bowling candidate pool before filter: 69; removed: 45; available: 10
-- Final output size: 3 eligible batters and 10 eligible bowlers. The batting list is not padded when fewer than 10 players satisfy every rule.
+- Expanded batting candidate pool before filter: 11; removed: 9; available: 2
+- Expanded bowling candidate pool before filter: 69; removed: 46; available: 9
+- Final output size: 2 eligible batters and 9 eligible bowlers. The batting list is not padded when fewer than 10 players satisfy every rule.
 - Eligibility audit files report every individual minimum and failed rule.
 
 ## Outputs
