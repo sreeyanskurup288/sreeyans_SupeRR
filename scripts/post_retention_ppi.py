@@ -75,6 +75,7 @@ MANUAL_GLOBAL_EXCLUSIONS = {
     "Namboori Tilak Varma": "Retained by Mumbai Indians",
     "Mitchell Starc": "Opted out of the IPL cycle",
     "Shikhar Dhawan": "Retired — not an auction candidate",
+    "Tim Southee": "KKR bowling coach — not an auction candidate",
 }
 
 MANUAL_BOWLER_EXCLUSIONS = {

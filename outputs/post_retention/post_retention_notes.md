@@ -10,7 +10,7 @@ The same PPI formula is used. Batting eligibility requires at least 25 innings p
 
 - Retained-player rows transcribed: 186
 - Expanded batting candidate pool before filter: 42; removed: 29; available: 10
-- Expanded bowling candidate pool before filter: 88; removed: 54; available: 10
+- Expanded bowling candidate pool before filter: 88; removed: 55; available: 10
 - Final output size: 10 eligible batters and 10 eligible bowlers. The batting list is not padded when fewer than 10 players satisfy every rule.
 - Eligibility audit files report every individual minimum and failed rule.
 
